@@ -1,0 +1,5 @@
+@import "reset.css";
+body {
+  background: #f4f4f4;
+  font: normal 1em/1.5 "Droid Sans", sans-serif;
+}

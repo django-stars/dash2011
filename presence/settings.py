@@ -74,7 +74,8 @@ INSTALLED_APPS = (
 
     # foreign appps
     'django_extensions',
-    'south'
+    'south',
+    'fresh_media',
 )
 
 try:

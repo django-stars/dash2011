@@ -3,3 +3,4 @@ South
 django-extensions
 gondor==1.0b1.post9
 psycopg2==2.4.1
+django-fresh-media
