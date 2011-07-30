@@ -1,0 +1,48 @@
+LOCAL_DEVELOPMENT = True
+DEBUG = True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'presence.db',
+    }
+}
+
+# use following logging setup
+# import logging
+# logger = logging.getLogger("presence.%s" % __name__)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+         'verbose': {
+             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+         },
+         'simple': {
+             'format': '%(levelname)s %(module)s %(message)s'
+         },
+     },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console':{
+               'level':'DEBUG',
+               'class':'logging.StreamHandler',
+               'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'presence': {
+             'handlers':['console'],
+             'level': 'DEBUG',
+         },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}

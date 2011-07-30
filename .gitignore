@@ -1,0 +1,9 @@
+*.pyc
+settings_local.py
+.DS_Store
+static_collected/*
+presence.db
+logs
+cache
+src
+pip-log.txt
