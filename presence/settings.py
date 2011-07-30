@@ -76,8 +76,10 @@ INSTALLED_APPS = (
     'django_extensions',
     'south',
     'fresh_media',
-    
+
+    # our apps
     'people',
+    'workflow',
 )
 
 LOCAL_DEVELOPMENT=True
