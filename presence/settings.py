@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'workflow',
     'activation',
     'shout',
+    'vote',
 )
 
 LOCAL_DEVELOPMENT=True

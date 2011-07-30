@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'apps.views.dashboard', name='dashboard'),
     url(r'^login/$', 'django.contrib.auth.views.login',
         {'template_name': 'login.html',}, name='login'),
     url(r'^logout/$', 'people.views.logout', name='logout'),
@@ -15,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^activation/', include('activation.urls')),
     url(r'^shout/', include('shout.urls')),
     url(r'^people/', include('people.urls')),
+    url(r'^vote/', include('vote.urls')),
 )
 
 

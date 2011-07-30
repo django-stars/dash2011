@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n people_tags %}
+{% block content %}
+  <img src="{% gravatar user.email 50 %}" alt="">
+  <div id="voting">
+    <form action="{% url vote %}" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Continue &rarr;"></p>
+    </form>
+  </div>
+{% endblock %}
