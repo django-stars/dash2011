@@ -1,7 +1,8 @@
 var Presence = (function(){
 	return {
 		init: function(){
-			true;		
+			// timeago activation;
+			$("time.relative").timeago();
         } // init
     }// main return
 })($);
