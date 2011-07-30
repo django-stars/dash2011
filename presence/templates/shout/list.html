@@ -2,15 +2,17 @@
 {% load shout_tags %}
 {% block content %}
 <h1>Shout list</h1>
-{% shout_new_form %}
 <section id="shouts">
 	{% if shouts %}
 	<ul>
 	{% for shout in shouts %}
 		<li>{% if shout.is_private %}<b>!</b>{% endif %}
-			<time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
+			<p>
+				<a href="{{shout.user.get_absolute_url}}" class="user">{{shout.user.get_full_name|default:shout.user.username}}</a>
+				<time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
+			<p>
 			{{shout.message|linebreaksbr}}
-			<a href="{{shout.get_absolute_url}}">#</a>
+			<a href="{{shout.get_absolute_url}}" class="permalink">#</a>
 		</li>
 	{% endfor %}
 	</ul>
