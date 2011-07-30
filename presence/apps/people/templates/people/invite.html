@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content  %}
+<div class="user-list">
+    <p>{% trans "Active users" %}</p>
+    {% for user in active_users %}
+        <li>{{ user }}</li>
+    {% endfor %}
+    
+    <p>{% trans "Inactive users" %}</p>
+    {% for user in not_active_users %}
+        <li>{{ user }}</li>
+    {% endfor %}
+    
+</div>
+<form action="." method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Continue &rarr;"></p>
+</form>
+{% endblock %}

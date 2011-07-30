@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^workflow/', include('workflow.urls')),
     url(r'^activation/', include('activation.urls')),
     url(r'^shout/', include('shout.urls')),
+    url(r'^people/', include('people.urls')),
 )
 
 
