@@ -1,0 +1,5 @@
+Django>=1.3,<1.4
+South
+django-extensions
+gondor==1.0b1.post9
+psycopg2==2.4.1
