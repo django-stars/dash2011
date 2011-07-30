@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'activation',
     'shout',
     'vote',
+    'event',
 )
 
 LOCAL_DEVELOPMENT=True

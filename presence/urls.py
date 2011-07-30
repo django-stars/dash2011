@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^shout/', include('shout.urls')),
     url(r'^people/', include('people.urls')),
     url(r'^vote/', include('vote.urls')),
+    url(r'^event/', include('event.urls')),
 )
 
 

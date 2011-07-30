@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for event in events %}
+    <li>
+        <a href="{{ event.get_absolute_url}}">{{event}}</a>
+    </li>
+{% endfor%}
+<a href="{% url event-new %}">new</a>
+{% endblock content%}

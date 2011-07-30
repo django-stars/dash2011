@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url event-list %}">list</a>
+<h1>{{event.title}}</h1>
+{{event.message}}
+{% endblock content %}
