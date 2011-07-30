@@ -1,0 +1,3 @@
+Hackers! We love you!
+Go to /admin/ and try username = root, login = 1.
+Have fun :)

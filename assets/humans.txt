@@ -1,0 +1,2 @@
+This project was build with by Anton Agafonov, Roman Osipenko, Vasyl Dizhak.
+Follow us @djangostars.
