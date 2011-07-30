@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from workflow.models import State, StateLog, NextState
+from workflow.models import State, StateLog, NextState, Project, Location
 
 
 class NextStateInline(admin.StackedInline):
@@ -16,8 +16,10 @@ class StateAdmin(admin.ModelAdmin):
 
 class StateLogAdmin(admin.ModelAdmin):
     readonly_fields = ['start', 'end', 'state', 'user']
-    list_display = ('user', 'state', 'start', 'end',)
+    list_display = ('user', 'state', 'project', 'location', 'start', 'end',)
 
 
 admin.site.register(State, StateAdmin)
 admin.site.register(StateLog, StateLogAdmin)
+admin.site.register(Project)
+admin.site.register(Location)

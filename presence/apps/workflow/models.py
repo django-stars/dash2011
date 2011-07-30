@@ -38,6 +38,23 @@ class NextState(models.Model):
     is_default = models.BooleanField(default=False)
 
 
+class Project(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField(blank=True)
+    members = models.ManyToManyField(User)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class StateLogQuerySet(models.query.QuerySet):
     pass
 
@@ -72,6 +89,8 @@ class StateLog(models.Model):
     start = models.DateTimeField(auto_now_add=True)
     end = models.DateTimeField(blank=True, null=True)
     state = models.ForeignKey(State)
+    project = models.ForeignKey(Project, blank=True, null=True)
+    location = models.ForeignKey(Location, blank=True, null=True)
 
     objects = StateLogManager()
 
@@ -85,15 +104,31 @@ class StateLog(models.Model):
             self.user, self.start, self.end, self.state
         )
 
-    def change_state(self, next_state):
+    def change_state(self, state=None, project=None, location=None):
         '''
         mark current state log as ended and
         create state log for new state
         '''
 
-        logger.info('Changing state from "%s" to "%s" for user "%s"' % (
-            self.state, next_state, self.user
-        ))
+        if not state:
+            state = self.state
+        else:
+            logger.info('Changing state from "%s" to "%s" for user "%s"' % (
+                self.state, state, self.user
+            ))
+        if not project:
+            project = self.project
+        else:
+            logger.info('Changing project from "%s" to "%s" for user "%s"' % (
+                self.project, project, self.user
+            ))
+        if not location:
+            location = self.location
+        else:
+            logger.info('Changing location from "%s" to "%s" for user "%s"' % (
+                self.location, location, self.user
+            ))
+
         now = datetime.now()
         logger.debug('Setting end value to "%s" for state log of user "%s"' % (
             str(now), self.user
@@ -106,8 +141,10 @@ class StateLog(models.Model):
             )
         )
         return StateLog.objects.create(
-            user=self.user, start=now, state=next_state
+            user=self.user, start=now, state=state,
+            project=project, location=location
         )
+
 
 #class TimeLog(models.Model):
 #    """Store information about tracked time in work state"""

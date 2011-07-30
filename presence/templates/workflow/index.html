@@ -1,0 +1,25 @@
+{% extends 'workflow/base.html' %}
+
+{% block content %}
+  <h2>Current state: {{ current_state_log.state }}</h2>
+  <form action="{% url workflow-index %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    <input type="hidden" name="is_state_form" value="true" />
+    {{ state_form.as_p }}
+    <p><input type="submit" value="Continue &rarr;"></p>
+  </form>
+  <h2>Current project: {{ current_state_log.project }}</h2>
+  <form action="{% url workflow-index %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    <input type="hidden" name="is_project_form" value="true" />
+    {{ project_form.as_p }}
+    <p><input type="submit" value="Continue &rarr;"></p>
+  </form>
+  <h2>Current location: {{ current_state_log.location }}</h2>
+  <form action="{% url workflow-index %}" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+    <input type="hidden" name="is_location_form" value="true" />
+    {{ location_form.as_p }}
+    <p><input type="submit" value="Continue &rarr;"></p>
+  </form>
+{% endblock content %}
