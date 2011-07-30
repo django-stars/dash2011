@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.db import transaction
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
 from workflow.models import StateLog
@@ -15,6 +16,7 @@ from workflow.forms import StateForm, ProjectForm, LocationForm
 logger = logging.getLogger("presence.%s" % __name__)
 
 
+@login_required
 @transaction.commit_on_success
 def index(request, template_name="workflow/index.html"):
     """display state of current user and allow to change it"""
