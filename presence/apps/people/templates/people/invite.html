@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n people_tags %}
 
 {% block content  %}
+<img src="{% gravatar user.email 50 %}" alt="">
 <div class="user-list">
     <p>{% trans "Active users" %}</p>
     {% for user in active_users %}
