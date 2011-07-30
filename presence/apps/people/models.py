@@ -7,7 +7,7 @@ import datetime
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, verbose_name=_("User"))
+    user = models.OneToOneField(User, verbose_name=_("User"))
     start_work = models.DateField(_("Start work"),
         help_text=_("Define when user start working with team."))
     vacation_days = models.PositiveIntegerField(_("Vacation days"),

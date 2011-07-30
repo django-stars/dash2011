@@ -82,6 +82,16 @@ INSTALLED_APPS = (
 
 LOCAL_DEVELOPMENT=True
 
+AUTH_PROFILE_MODULE = 'people.Profile'
+
+AUTHENTICATION_BACKENDS = (
+    "apps.people.emailauth.EmailBackend",
+    "django.contrib.auth.backends.ModelBackend",
+    )
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_URL = "/logout/"
+
 try:
     from settings_local import *
 except ImportError:
