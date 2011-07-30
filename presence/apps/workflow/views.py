@@ -21,6 +21,7 @@ logger = logging.getLogger("presence.%s" % __name__)
 def index(request, template_name="workflow/index.html"):
     """display state of current user and allow to change it"""
 
+    redirect_to = request.META.get('HTTP_REFERER', reverse('workflow-index'))
     current_state_log = StateLog.objects.get_user_current_state_log(
         request.user
     )
@@ -29,7 +30,7 @@ def index(request, template_name="workflow/index.html"):
         if state_form.is_valid():
             new_state = state_form.save()
             messages.success(request, _("State changed to %s" % new_state.state))
-            return HttpResponseRedirect(reverse('workflow-index'))
+            return HttpResponseRedirect(redirect_to)
     else:
         state_form = StateForm(request.user, current_state_log)
 
@@ -38,7 +39,7 @@ def index(request, template_name="workflow/index.html"):
         if project_form.is_valid():
             new_state = project_form.save()
             messages.success(request, _("Project changed to %s" % new_state.project))
-            return HttpResponseRedirect(reverse('workflow-index'))
+            return HttpResponseRedirect(redirect_to)
     else:
         project_form = ProjectForm(
             request.user, current_state_log,
@@ -50,7 +51,7 @@ def index(request, template_name="workflow/index.html"):
         if location_form.is_valid():
             new_state = location_form.save()
             messages.success(request, _("Location changed to %s" % new_state.location))
-            return HttpResponseRedirect(reverse('workflow-index'))
+            return HttpResponseRedirect(redirect_to)
     else:
         location_form = LocationForm(
             request.user, current_state_log,
