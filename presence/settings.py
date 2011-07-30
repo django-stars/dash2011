@@ -76,6 +76,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'south',
     'fresh_media',
+    
+    'people',
 )
 
 LOCAL_DEVELOPMENT=True
