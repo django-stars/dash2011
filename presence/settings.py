@@ -78,6 +78,8 @@ INSTALLED_APPS = (
     'fresh_media',
 )
 
+LOCAL_DEVELOPMENT=True
+
 try:
     from settings_local import *
 except ImportError:

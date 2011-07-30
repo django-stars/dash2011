@@ -1,6 +1,5 @@
 *.pyc
 settings_local.py
-local_settings.py
 .DS_Store
 presence/static_collected/*
 presence.db
