@@ -3,7 +3,6 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-
 admin.autodiscover()
 
 
@@ -14,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'people.views.logout', name='logout'),
     url(r'^workflow/', include('workflow.urls')),
     url(r'^activation/', include('activation.urls')),
+    url(r'^shout/', include('shout.urls')),
 )
 
 

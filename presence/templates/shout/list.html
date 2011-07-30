@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load shout_tags %}
+{% block content %}
+<h1>Shout list</h1>
+{% shout_new_form %}
+<section id="shouts">
+	{% if shouts %}
+	<ul>
+	{% for shout in shouts %}
+		<li>{% if shout.is_private %}<b>!</b>{% endif %}
+			<time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
+			{{shout.message|linebreaksbr}}
+			<a href="{{shout.get_absolute_url}}">#</a>
+		</li>
+	{% endfor %}
+	</ul>
+	{% else %}
+	<p class="empty">There are no shouts yet. You can be first one.</p>
+	{% endif %}
+</section>
+{% endblock content %}

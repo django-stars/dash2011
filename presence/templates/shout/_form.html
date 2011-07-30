@@ -1,0 +1,12 @@
+<form method="post" action="{% url shout-new %}">
+	{% csrf_token %}
+	{% if form.errors %}
+	{{ form.errors }}
+	{% endif %}
+	<p>
+		{% for field in form %}
+			{{ field }}
+		{% endfor %}
+		<input type="submit" value="Create"/>
+	</p>
+</form>

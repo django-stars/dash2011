@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{shout.user.get_fullname|default:shout.user.username}}</h1>
+<p><a href="{% url shout-list %}">list</a></p>
+<hr/>
+<section id="shout">
+	<time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
+	<article>
+		<div class="message">{{shout.message}}</div>
+	</article>
+</section>
+{% endblock content %}
