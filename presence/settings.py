@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     # our apps
     'people',
     'workflow',
+    'activation',
 )
 
 LOCAL_DEVELOPMENT=True
@@ -88,11 +89,14 @@ AUTH_PROFILE_MODULE = 'people.Profile'
 
 AUTHENTICATION_BACKENDS = (
     "apps.people.emailauth.EmailBackend",
+    "apps.activation.backends.UrlLoginBackend",
     "django.contrib.auth.backends.ModelBackend",
     )
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/logout/"
+
+DEFAULT_FROM_EMAIL = "presence@djangostars.com"
 
 try:
     from settings_local import *

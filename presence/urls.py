@@ -13,6 +13,7 @@ urlpatterns = patterns('',
         {'template_name': 'login.html',}, name='login'),
     url(r'^logout/$', 'people.views.logout', name='logout'),
     url(r'^workflow/', include('workflow.urls')),
+    url(r'^activation/', include('activation.urls')),
 )
 
 
