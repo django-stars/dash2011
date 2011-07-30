@@ -1,7 +1,7 @@
 *.pyc
 settings_local.py
 .DS_Store
-static_collected/*
+presence/static_collected/*
 presence.db
 logs
 cache
