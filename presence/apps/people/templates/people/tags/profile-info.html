@@ -14,5 +14,5 @@
     {% if user.get_profile.location %}
       <span>Current location: <em>{{ user.get_profile.location }}</em></span>
     {% endif %}
-    {% user_plans %}
+    {% user_plans user.username %}
 </figure>

@@ -7,4 +7,22 @@
             {% endfor %}
         </ul>
     {% endif  %}
+
+    {% if seven_days_plan %}
+        <span>Week:</span>
+            <ul>
+                {% for item in seven_days_plan %}
+                    <li>{{ item.get_work_status_display }}</li>
+                {% endfor %}
+            </ul>
+    {% endif  %}
+
+    {% if thirty_days_plan %}
+        <span>Month:</span>
+            <ul>
+                {% for item in thirty_days_plan %}
+                    <li>{{ item.get_work_status_display }}</li>
+                {% endfor %}
+            </ul>
+    {% endif  %}
 </div>
