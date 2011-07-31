@@ -2,7 +2,9 @@
 {% load shout_tags %}
 
 {% block activity-item %}
+<p>
   {% include "activity/_user.html" %}
-  {{ activity.render_action }}
+  {{ activity.render_action }}:
+</p>
   {{ activity.shout.message|linebreaksbr }}
 {% endblock activity-item %}

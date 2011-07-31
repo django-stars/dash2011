@@ -1,5 +1,5 @@
 {% load people_tags %}
-<a href="#">
-    <img src="{% gravatar activity.user.email 32 %}" alt="">
-    {{ activity.user }}
+<img src="{% gravatar activity.user.email 16 %}" alt=""/>
+<a href="{{activity.user.get_absolute_url}}">
+    {{activity.user.get_full_name|default:activity.user.username}}
 </a>

@@ -127,7 +127,7 @@ body > header form.shout p.controls {
   clear: both;
 }
 #content {
-  margin: 5em 1em 1em 16em;
+  margin: 5em 1em 1em 20em;
   display: table;
   box-shadow: .125em .125em .5em #222;
   border-radius: .25em;
@@ -143,39 +143,39 @@ body > header form.shout p.controls {
 #bar textarea {
   height: 2em;
 }
-#shouts header {
+.main-list header {
   border-bottom: .25em solid #eee;
   padding: 1.5em 1em .5em;
   margin-bottom: 1em;
   height: 1.75em;
 }
-#shouts header h1 {
+.main-list header h1 {
   float: left;
   font-weight: bold;
   font-size: 1.25em;
   letter-spacing: -0.0125em;
 }
-#shouts header span.updated {
+.main-list header span.updated {
   float: right;
 }
-#shouts ul {
+.main-list ul {
   list-style: none;
 }
-#shouts li {
+.main-list li {
   border-bottom: 1px solid #ddd;
   padding: .5em 1em 1em;
   position: relative;
 }
-#shouts li.my {
+.main-list li.my {
   background: #eee;
 }
-#shouts li.date {
+.main-list li.date {
   font-size: 1.1em;
   text-align: center;
   color: #999;
   margin-top: 1em;
 }
-#shouts li span.time {
+.main-list li span.time {
   position: absolute;
   left: 1em;
   width: 3em;
@@ -185,19 +185,19 @@ body > header form.shout p.controls {
   color: #999;
   text-shadow: 0 0 1px #fff;
 }
-#shouts li p.headline {
+.main-list li p.headline {
   font-size: .75em;
   margin: .5em 0 0 4em;
 }
-#shouts li p.headline img {
+.main-list li p.headline img {
   float: left;
   margin-right: .5em;
 }
-#shouts li article {
+.main-list li article {
   margin-left: 3em;
   font-family: "Georgia", sans;
 }
-#shouts time {
+.main-list time {
   font-size: .75em;
   color: #fff;
   background: #aaa;

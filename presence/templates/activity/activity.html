@@ -1,12 +1,29 @@
-{% load pagination_tags %} 
-
-{% autopaginate activity 15 %}
-<ul class="activity">
-  {% for action in activity %}
-    <li>
-      <div class="activity-item">{{ action.render }}</div>
-      <div class="time">{{ action.time }}</div>
+{% load pagination_tags people_tags%} 
+<section id="activity" class="main-list">
+    <header>
+    <h1>Latest activity</h1>
+    <span class="updated">
+        <time datetime="{% now "c" %}" class="relative">{% now "c" %}</time>
+    </span>
+    </header>
+{% if activity %}
+{% autopaginate activity 100 %}
+{% for action in activity %}
+<ul>
+    {% ifchanged action.time|date:"Ymd" %}
+    <li class="date">{{action.time|date:"l, d F Y"}}</li>
+    {% endifchanged %}
+    <li{% if activity.user == user%} class="my"{% endif %}>
+        <span class="time">{{action.time|date:"H:i"}}</span>
+        <article>{{action.render|safe}}</article>
+        <p class="headline">
+            <time datetime="{{action.time|date:"c"}}" class="relative">{{action.time}}</time>
+        </p>
     </li>
-  {% endfor %}
 </ul>
+{% endfor %}
 <div class="paginator"> {% paginate %} </div>
+{% else %}
+    <p class="empty">There are no shouts yet. You can be first one.</p>
+{% endif %}
+</section>
