@@ -35,6 +35,10 @@ class Profile(models.Model):
             self.user.get_full_name() else \
             self.user.username
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('profile-details', (self.id,))
+
     @property
     def state_log(self):
         if not hasattr(self, '_state_log'):
