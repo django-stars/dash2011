@@ -1,23 +1,34 @@
 {% load i18n %}
-
-<h2>Current state: {{ current_state_log.state }}</h2>
 <form action="{% url workflow-index %}" method="post" accept-charset="utf-8">
-  {% csrf_token %}
-  <input type="hidden" name="is_state_form" value="true" />
-  {{ state_form.as_p }}
-  <p><input type="submit" value="↻"></p>
+    {% csrf_token %}
+    <input type="hidden" name="is_state_form" value="true" />
+    <p>
+        <label for="id_next_state"><em>State</em> {{ current_state_log.state }}</label>
+        <span class="control">
+            {{ state_form.next_state }}
+            <input type="submit" value="update"/><!-- ↻ -->
+        </span>
+    </p>
 </form>
-<h2>Current project: {{ current_state_log.project }}</h2>
 <form action="{% url workflow-index %}" method="post" accept-charset="utf-8">
   {% csrf_token %}
   <input type="hidden" name="is_project_form" value="true" />
-  {{ project_form.as_p }}
-  <p><input type="submit" value="↻"></p>
+  <p>
+      <label for="id_project"><em>Project</em> {{ current_state_log.project }}</label>
+      <span class="control">
+          {{ project_form.project }}
+          <input type="submit" value="update"/>
+      </span>
+  </p>
 </form>
-<h2>Current location: {{ current_state_log.location }}</h2>
 <form action="{% url workflow-index %}" method="post" accept-charset="utf-8">
   {% csrf_token %}
   <input type="hidden" name="is_location_form" value="true" />
-  {{ location_form.as_p }}
-  <p><input type="submit" value="↻"></p>
+  <p>
+      <label for="id_location"><em>Location</em> {{ current_state_log.location }}</label>
+      <span class="control">
+          {{ location_form.location }}
+          <input type="submit" value="update"/>
+      </span>
+  </p>
 </form>

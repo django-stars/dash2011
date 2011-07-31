@@ -89,6 +89,42 @@ body > header {
         }        
     }
     
+    #workflow {
+        position: absolute;
+        left: 19.5em;
+        bottom: .75em;
+        
+        form {
+            float: left;
+/*            border-left: 1px solid #999;*/
+            color: #fff;
+            padding: 0 .5em;
+            font-size: .75em;
+            
+            &:first-child {
+                border: none;
+            }
+            
+            span.control {
+                display: none;
+            }
+            
+            p {
+                float: left;
+            }
+            
+            label {
+                margin-right: .5em;
+                
+                em {
+                    background: lighten(@header-bg, 15%);
+                    padding: .25em .5em;
+                    border-radius: .25em;
+                }
+            }
+        }
+    }
+    
     nav {
         position: absolute;
         right: 1em;

@@ -3,6 +3,7 @@ var Presence = (function(){
         init: function(){
             $("time.relative").timeago();
             Presence.makeShout();
+            Presence.workflowUpdate();
         }, // init
         makeShout: function(){
             var top_shout = $("form.shout");
@@ -33,7 +34,37 @@ var Presence = (function(){
                     }, "json") // post
                 return false;
             })
-        }
+        }, // makeShout
+        
+        workflowUpdate: function(){
+            $("#workflow label").each(function(){
+                var this_ = $(this);
+                var form_ = $(this).closest("form");
+                var select_ = $("select", form_);
+                var controls = $("span.control", form_);
+
+                form_.submit(function(){
+                   $.post(
+                       form_.attr("action"),
+                       form_.serialize(),
+                       function(data){
+                           controls.hide();
+                       }
+                    );
+                    return false;
+                }); //change
+                this_.click(function(){
+                    if (controls.is(":visible")) {
+                        controls.hide();
+                    }
+                    else {
+                        controls.show();
+                    }
+                }); // click
+            }) // each
+            
+            
+        } // workflowUpdate
     }// main return
 })($);
 

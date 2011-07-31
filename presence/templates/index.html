@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-{% load i18n people_tags %}
+{% load i18n people_tags planning_tags %}
 {% block title %}Dashboard{% endblock title %}
 {% block aside %}
 <section id="user-info">
 <img src="{% gravatar user.email 96 %}" alt="">
 <h1>{{user.get_full_name|default:user.username}}</h1>
+{% user_plans user.username %}
+<a href="{% url planning %}">Plan something</a>
 </section>
 <div id="voting">
   <form action="{% url vote %}" method="post" accept-charset="utf-8">

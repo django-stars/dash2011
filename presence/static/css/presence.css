@@ -82,6 +82,36 @@ body > header h1 a span {
   border-radius: .25em;
   letter-spacing: 0;
 }
+body > header #workflow {
+  position: absolute;
+  left: 19.5em;
+  bottom: .75em;
+}
+body > header #workflow form {
+  float: left;
+  /*            border-left: 1px solid #999;*/
+
+  color: #fff;
+  padding: 0 .5em;
+  font-size: .75em;
+}
+body > header #workflow form:first-child {
+  border: none;
+}
+body > header #workflow form span.control {
+  display: none;
+}
+body > header #workflow form p {
+  float: left;
+}
+body > header #workflow form label {
+  margin-right: .5em;
+}
+body > header #workflow form label em {
+  background: #8195aa;
+  padding: .25em .5em;
+  border-radius: .25em;
+}
 body > header nav {
   position: absolute;
   right: 1em;
