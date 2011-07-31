@@ -40,13 +40,13 @@ class StateForm(BaseWorkflowForm):
                     ('leave_as_it_is', _("I love to do unusual things"))
                 ),
                 label=_("Sorry, I forget to change state in time"),
-                error_messages = {
+                error_messages={
                     'required': _("You was in previous state for unusually long time")
                 }
             )
 
     def save(self):
-        # checking if we need to set previous state log end time to 
+        # checking if we need to set previous state log end time to
         # it's usual duration
 
         if self.cleaned_data.get('reset_to_normal', 'leave_as_it_is') == 'reset_to_normal':

@@ -108,4 +108,3 @@ def team_list(request):
 
     return render_to_response('people/team.html', data,
         RequestContext(request))
-

@@ -7,8 +7,8 @@ from django.conf import settings
 
 CONVERT_URLS = getattr(settings, 'SHOUT_CONVERT_URL', True)
 
-USER_RE = re.compile(r'@(?P<user>[\d\w_]+)', re.M|re.U|re.I|re.S)
-LINK_RE= re.compile(r'(?P<link>https?://[^\s]+)', re.M|re.I|re.U|re.S)
+USER_RE = re.compile(r'@(?P<user>[\d\w_]+)', re.M | re.U | re.I | re.S)
+LINK_RE = re.compile(r'(?P<link>https?://[^\s]+)', re.M | re.I | re.U | re.S)
 
 
 def url2link(message):

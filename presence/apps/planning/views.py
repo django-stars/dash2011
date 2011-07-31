@@ -25,7 +25,7 @@ def planning(request):
             plan = form.save(commit=False)
             plan.user = request.user
             plan.save()
-            logger.info("Planning for user %s" %  request.user.username)
+            logger.info("Planning for user %s" % request.user.username)
             messages.info(request, "New plan was added.")
             if not request.is_ajax():
                 return HttpResponseRedirect(reverse("dashboard"))

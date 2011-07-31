@@ -94,7 +94,7 @@ def index(
         }), mimetype='application/json')
     else:
         return render_to_response(
-            template_name, 
+            template_name,
             {
                 'state_form': state_form, 'project_form': project_form,
                 'location_form': location_form,

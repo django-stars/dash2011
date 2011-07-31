@@ -7,6 +7,6 @@ register = template.Library()
 
 @register.inclusion_tag('shout/_form.html')
 def shout_new_form():
-	return {
-		'form': ShoutForm()
-	}
+    return {
+        'form': ShoutForm()
+    }

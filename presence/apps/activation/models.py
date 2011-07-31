@@ -12,6 +12,7 @@ logger = logging.getLogger("presence.%s" % __name__)
 class NoKeyFound(Exception):
     pass
 
+
 def _generate_key():
     return uuid.uuid4().hex
 

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 
 from activation.models import ActivationKey
 
+
 class UrlLoginBackend:
     def authenticate(self, key):
         try:

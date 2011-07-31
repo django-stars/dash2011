@@ -18,7 +18,7 @@ class State(models.Model):
     usual_duration = models.IntegerField(
         _('normal duration(minutes)'), blank=True, null=True,
         help_text=_("Usual durattion of this step. Leave empty if not possible to specify.")
-    )                                               
+    )
     max_duration = models.IntegerField(
         _('maximum duration(minutes)'), blank=True, null=True,
         help_text=_("Maximum duration. If user is in this state more than max_duraction minutes, He will be asked to reset duration to 'usual duratin'.")

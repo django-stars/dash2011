@@ -61,10 +61,10 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'presence.urls'
 
-TEMPLATE_DIRS = [
+TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
-    os.path.join(os.path.dirname(__file__),"..", "assets")
-    ]
+    os.path.join(os.path.dirname(__file__), "..", "assets"),
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
@@ -113,7 +113,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     )
 
-LOGIN_URL='/login/'
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/logout/"
 
