@@ -315,3 +315,6 @@ footer {
   padding: 0.3em 0.5em;
   border-radius: 0.4em;
 }
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
+  background: #313c48;
+}
