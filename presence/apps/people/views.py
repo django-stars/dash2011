@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 from forms import InviteForm, ProfileEditForm
+from activity.models import Activity
 
 import logging
 
@@ -70,7 +71,8 @@ def profile_details(request, id):
     user = get_object_or_404(User, id=id)
 
     data = {
-        "user": user
+        "user": user,
+        "activity": Activity.objects.by_user(user)
     }
     return render_to_response('people/profile-details.html', data,
         RequestContext(request))
@@ -81,7 +83,7 @@ def team_list(request):
     users = User.objects.filter(is_active=True)
 
     data = {
-        'users': users
+        'users': users,
     }
 
     return render_to_response('people/team.html', data,
