@@ -1,8 +1,10 @@
 from django.db import models
 
+
 class EventPublishedManager(models.Manager):
     def get_query_set(self, *args, **kwargs):
         return super(EventPublishedManager, self).get_query_set(*args, **kwargs).filter(is_published=True)
+
 
 class Event(models.Model):
     title = models.CharField(max_length=50)
@@ -11,7 +13,7 @@ class Event(models.Model):
     is_published = models.BooleanField(default=True)
     no_time = models.BooleanField(default=False)
     message = models.TextField()
-    
+
     objects = models.Manager()
     published = EventPublishedManager()
 

@@ -8,7 +8,8 @@ from django.db.models import Q
 class ShoutManager(models.Manager):
     """ Custom mamger to prevent show of private shouts """
     def filter_for_user(self, user, *args, **kwargs):
-        return self.get_query_set().filter(Q(is_private=False) | Q(is_private=True, user=user))
+        return self.get_query_set().filter(Q(is_private=False) | \
+            Q(is_private=True, user=user))
 
     def get_for_user(self, user, *args, **kwargs):
         return self.filter_for_user(user=user).get(*args, **kwargs)
@@ -27,7 +28,7 @@ class Shout(models.Model):
 
     class Meta:
         ordering = ('-created',)
-    
+
     def __unicode__(self):
         return "%s %s @ %s" % (('', '!!')[self.is_private], self.user.username, self.created)
 
