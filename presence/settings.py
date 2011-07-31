@@ -117,6 +117,12 @@ LOGOUT_URL = "/logout/"
 DEFAULT_FROM_EMAIL = "presence@djangostars.com"
 SHOUT_CONVERT_URL = True
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dash@djangostars.com'
+EMAIL_HOST_PASSWORD = 'dashdash'
+EMAIL_PORT = 587
+
 try:
     from settings_local import *
 except ImportError:
