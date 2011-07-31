@@ -44,6 +44,7 @@ var Presence = (function(){
             Presence.workflowUpdate();
             Presence.initModal();
             Presence.initPlan();
+            Presence.initMessages();
         }, // init
         
         makeShout: function(){
@@ -151,6 +152,14 @@ var Presence = (function(){
             $('#plan-link').click(function(){
                 Presence.loadInModal('/planning/');
                 return false;
+            });
+        },
+        initMessages: function(){
+            $('#notifications li').each(function(index, element) {
+                if (!$(element).hasClass('showed')) {
+                    $.jGrowl($(element).text());
+                    $(element).addClass('showed');
+                }
             });
         }
     }// main return
