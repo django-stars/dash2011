@@ -15,10 +15,14 @@ class UserPlanManager(models.Manager):
     def user_plans(self, username, days=0):
         """ Get per user future plans for defined number of days """
         user = User.objects.get(username=username)
-
         today = datetime.date.today()
         _future = today + datetime.timedelta(days=days)
-        return self.filter(user=user, date__range=(today, _future))
+
+        if days==0:
+            return self.filter(user=user, date__range=(today, _future))
+
+        _next = today + datetime.timedelta(days=1)
+        return self.filter(user=user, date__range=(_next, _future))
 
     def today_group_status(self):
         """ Return list of today states for all team """
