@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.hashcompat import md5_constructor
 from django.utils.html import escape
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 import urllib
 
@@ -21,6 +22,11 @@ def gravatar(value, size=100):
 register.simple_tag(gravatar)
 
 
-@register.inclusion_tag("people/tags/profile-info.html") 
-def profile_info(username):
-    pass
+@register.inclusion_tag("people/tags/profile-info.html", takes_context=True)
+def profile_info(context, username):
+    user = get_object_or_404(User, username=username)
+    data = {
+        'user': user,
+        'request': context['request']
+    }
+    return data
