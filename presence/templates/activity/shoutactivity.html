@@ -6,5 +6,5 @@
   {% include "activity/_user.html" %}
   {{ activity.render_action }}:
 </p>
-  {{ activity.shout.message|linebreaksbr }}
+  {{ activity.shout.message|safe|linebreaksbr }}
 {% endblock activity-item %}
