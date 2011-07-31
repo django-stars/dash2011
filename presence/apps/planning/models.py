@@ -18,7 +18,7 @@ class UserPlanManager(models.Manager):
         today = datetime.date.today()
         _future = today + datetime.timedelta(days=days)
 
-        if days==0:
+        if days == 0:
             return self.filter(user=user, date__range=(today, _future))
 
         _next = today + datetime.timedelta(days=1)
@@ -35,8 +35,8 @@ class DayPlan(models.Model):
     work_status = models.CharField(_("Work status"),
         max_length=1, choices=WORK_STATUS)
     start_date = models.DateTimeField(blank=True, null=True)
-    end_date = models.DateTimeField(blank=True, null=True)
-    created = models.DateTimeField(auto_now_add=True)
+    end_date = models.TimeField(blank=True, null=True)
+    created = models.TimeField(auto_now_add=True)
 
     objects = UserPlanManager()
 

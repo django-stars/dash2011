@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^people/', include('people.urls')),
     url(r'^vote/', include('vote.urls')),
     url(r'^event/', include('event.urls')),
+    url(r'^planning/', include('planning.urls'))
 )
 
 
