@@ -48,12 +48,15 @@ def is_private(message):
 
 
 def user2link(message):
+    """ Conver user to clickable link and add to mentions """
     users = USER_RE.findall(message)
+    mentions = list()
     for user in users:
         try:
             django_user = User.objects.get(username=user)
             user_link = '<a href="%s">@%s</a>' % (django_user.get_absolute_url(), django_user.get_full_name() or django_user.username)
             message = message.replace('@%s' % user, user_link)
+            mentions.append(django_user)
         except User.DoesNotExist:
             pass
-    return message
+    return message, mentions

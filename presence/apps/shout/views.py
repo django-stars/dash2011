@@ -22,9 +22,7 @@ def shout_new(request):
     if request.method == "POST":
         form = ShoutForm(request.POST)
         if form.is_valid():
-            shout = form.save(commit=False)
-            shout.user = request.user
-            shout.save()
+            shout = form.save(user=request.user)
             logger.info('New %s shout from "%s"' % (('public', 'private')[shout.is_private], shout.user.username))
             return HttpResponseRedirect(reverse('shout-list'))
     else:

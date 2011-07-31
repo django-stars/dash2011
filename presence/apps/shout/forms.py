@@ -8,10 +8,12 @@ class ShoutForm(forms.ModelForm):
         model = Shout
         fields = ('message',)
 
-    def save(self, *args, **kwargs):
-        super(ShoutForm, self).save(*args, **kwargs)
+    def save(self, user, *args, **kwargs):
         instance = self.instance
         instance.is_private, instance.message = is_private(instance.message)
-        instance.message = user2link(instance.message)
         instance.message = url2link(instance.message)
+        instance.message, mentions = user2link(instance.message)
+        instance.user = user
+        super(ShoutForm, self).save(*args, **kwargs)
+        instance.mentions.add(*mentions)
         return instance
