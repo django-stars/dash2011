@@ -1,0 +1,10 @@
+<div class="plans">
+    {% if plans %}
+    <span>Today plans:</span>
+        <ul>
+            {% for item in plans %}
+                <li>{{ item.get_work_status_display }}</li>
+            {% endfor %}
+        </ul>
+    {% endif  %}
+</div>

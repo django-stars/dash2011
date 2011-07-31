@@ -1,4 +1,4 @@
-{% load i18n people_tags %}
+{% load i18n people_tags planning_tags %}
 
 <figure>
     <img src="{% gravatar user.email 50 %}" alt="{{ user.username }}">
@@ -14,4 +14,5 @@
     {% if user.get_profile.location %}
       <span>Current location: <em>{{ user.get_profile.location }}</em></span>
     {% endif %}
+    {% user_plans %}
 </figure>

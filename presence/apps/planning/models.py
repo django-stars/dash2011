@@ -12,13 +12,15 @@ WORK_STATUS = (
 
 
 class UserPlanManager(models.Manager):
-    def user_plans(user, days):
+    def user_plans(self, username, days=0):
         """ Get per user future plans for defined number of days """
+        user = User.objects.get(username=username)
+
         today = datetime.date.today()
         _future = today + datetime.timedelta(days=days)
         return self.filter(user=user, date__range=(today, _future))
 
-    def today_group_status():
+    def today_group_status(self):
         """ Return list of today states for all team """
         return self.filter(date=datetime.date.today())
 
@@ -32,10 +34,12 @@ class DayPlan(models.Model):
     end_date = models.DateTimeField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    objects = UserPlanManager()
+
     class Meta:
         verbose_name = _("Plan for day")
         verbose_name_plural = _("Plans")
         ordering = ("-created",)
 
     def __unicode__(self):
-        return self.date
+        return self.user.username
