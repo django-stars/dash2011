@@ -1,8 +1,12 @@
 {% load i18n %}
 <div class="planning">
+    <h2>Plan something</h2>
     <form action="{% url planning %}" method="post" accept-charset="utf-8">
         {% csrf_token %}
         {{ form.as_p }}
-        <p><input type="submit" value="Continue &rarr;"></p>
+        <p class="controls">
+            <input type="submit" value="Continue &rarr;">
+            or <a class="close-modal" href="#">cancel</a>.
+        </p>
     </form>
 </div>

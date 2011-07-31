@@ -108,14 +108,14 @@ var Presence = (function(){
         }, // workflowUpdate
 
         initModal: function(){
-            $('#modal .close-modal').click(function(){
+            $('#modal .close-modal').live('click', function(){
                 $('#modal').hide();
             });
         },
         loadInModal: function(url){
             $('#modal .content').load(url, function(){
                 modal_width = 400;
-                modal_height = 400;
+                modal_height = 225;
                 $('#modal').css({
                     'left': ($(window).width() - modal_width) / 2,
                     'top': ($(window).height() - modal_height) / 2,
