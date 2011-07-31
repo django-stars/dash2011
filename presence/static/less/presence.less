@@ -17,7 +17,7 @@ a {
 .gradient(@from, @to) {
     background-image: -moz-linear-gradient(@from, @to);
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@from), to(@to));
-    background-image: -webkit-linear-gradient(@from, @to); 
+    background-image: -webkit-linear-gradient(@from, @to);
     background-image: -o-linear-gradient(@from, @to);
 }
 
@@ -66,12 +66,12 @@ body > header {
         height: 2em;
         line-height: 2em;
         margin-left: .75em;
-
+        
         a {
             color: #f2f2f2;
             text-shadow: 0 0 .125em #fff;
             position: relative;
-
+            
             span {
                 font-size: .2em;
                 position: absolute;
@@ -86,7 +86,7 @@ body > header {
                 border-radius: .25em;
                 letter-spacing: 0;
             }
-        }        
+        }
     }
     
     #workflow {
@@ -147,7 +147,7 @@ body > header {
                 text-shadow: 0 0 .25em #fff;
             }
         }
-        
+    
     }
     
     form.shout {
@@ -204,7 +204,7 @@ body > header {
 	box-shadow: 0 0 .5em #222;
 	position: absolute;
 	top: -2em;
-
+	
 	textarea {
 		height: 2em;
 	}
@@ -217,7 +217,7 @@ body > header {
 	    padding: 1.5em 1em .5em;
 	    margin-bottom: 1em;
 	    height: 1.75em;
-
+	    
 	    h1 {
 	        float: left;
 	        font-weight: bold;
@@ -229,11 +229,11 @@ body > header {
 	        float: right;
 	    }
 	}
-
+	
 	ul {
       list-style: none;
 	}
-
+	
 	li {
         //border-bottom: 1px solid #ddd;
         padding: .5em 1em 1em;
@@ -266,11 +266,11 @@ body > header {
             color: #999;
             text-shadow: 0 0 1px #fff;
         }
-
+        
         p.headline {
 	        font-size: .75em;
 	        margin: .5em 0 0 4em;
-	        
+		    
 		    img {
 		        float: left;
 		        margin-right: .5em;
@@ -282,7 +282,7 @@ body > header {
             font-family: "Georgia", sans;
 		}
 	}
-
+	
 	time {
 		font-size: .75em;
 		color: #fff;
@@ -325,7 +325,7 @@ aside {
             line-height: 1;
             padding: .25em .25em .25em 0;
         }
-        
+    
     }
 }
 
@@ -354,7 +354,7 @@ footer {
     
     form {
         padding: 0 1em;
-                
+        
         p {
             clear: both;
             line-height: 2em;
@@ -379,6 +379,32 @@ footer {
   border-radius: 0.4em;
 }
 
+
 div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
   background: darken(@header-bg, 20%);
+  }
+
+form.big-form {
+    min-height: 15em;
+    
+    p {
+        line-height: 2em;
+        
+        label {
+            float: left;
+            width: 8em;
+            text-align: right;
+            margin-right: .5em;
+            text-shadow: 0 0 1px #fff;
+        }
+        .helptext {
+            font-size: .8em;
+            color: #444;
+            text-shadow: 0 0 1px #fff;
+        }
+    }
+    
+    p.controls {
+        margin: 1em 0 1em 8.5em;
+    }
 }

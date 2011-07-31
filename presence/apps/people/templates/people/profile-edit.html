@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-    <form action="." method="post" accept-charset="utf-8">
+<section id="shouts" class="main-list">
+    <header>
+    <h1>Edit Profile</h1>
+    </header>
+    <form action="." method="post" class="big-form">
         {% csrf_token %}
         {{ form.as_p  }}
-        <p><input type="submit" value="Continue &rarr;"></p>
+        <p class="controls">
+            <input type="submit" value="Continue &rarr;">
+            You can also <a href="{% url change-password %}">{% trans "Change password" %}</a>.
+        </p>
     </form>
-    <span><a href="{% url change-password %}">{% trans "Change password" %}</a></span>
+</section>
 {% endblock %}

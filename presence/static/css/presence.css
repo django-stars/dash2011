@@ -318,3 +318,24 @@ footer {
 div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
   background: #313c48;
 }
+form.big-form {
+  min-height: 15em;
+}
+form.big-form p {
+  line-height: 2em;
+}
+form.big-form p label {
+  float: left;
+  width: 8em;
+  text-align: right;
+  margin-right: .5em;
+  text-shadow: 0 0 1px #fff;
+}
+form.big-form p .helptext {
+  font-size: .8em;
+  color: #444;
+  text-shadow: 0 0 1px #fff;
+}
+form.big-form p.controls {
+  margin: 1em 0 1em 8.5em;
+}
