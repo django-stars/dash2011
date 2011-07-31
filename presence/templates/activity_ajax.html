@@ -1,0 +1,14 @@
+{% for action in activity %}
+<ul>
+    {% ifchanged action.time|date:"Ymd" %}
+    <li class="date">{{action.time|date:"l, d F Y"}}</li>
+    {% endifchanged %}
+    <li{% if activity.user == user%} class="my"{% endif %}>
+        <span class="time">{{action.time|date:"H:i"}}</span>
+        <article>{{action.render|safe}}</article>
+        <p class="headline">
+            <time datetime="{{action.time|date:"c"}}" class="relative">{{action.time}}</time>
+        </p>
+    </li>
+</ul>
+{% endfor %}
