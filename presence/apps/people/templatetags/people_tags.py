@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 
 import urllib
 
+from planning.models import DayPlan
+
 register = template.Library()
 
 GRAVATAR_URL = getattr(settings, "GRAVATAR_URL",\
