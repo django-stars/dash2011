@@ -6,5 +6,12 @@
     <span>{% if request.user.username == user.username %}<a href="{% url profile-edit %}">{% trans "Edit profile" %}</a>{% endif %}</span><br>
     <span>Start work: <em>{{ user.get_profile.start_work }}</em></span><br>
     <span>Vacation days: <em>{{ user.get_profile.vacation_days }}</em></span><br>
-    <span>Vocation days used: <em>{{ user.get_profile.vacation_days_used }}</em></span>
+    <span>Vocation days used: <em>{{ user.get_profile.vacation_days_used }}</em></span><br>
+    <span>Current state: <em>{{ user.get_profile.state }}</em></span><br>
+    {% if user.get_profile.project %}
+      <span>Current project: <em>{{ user.get_profile.project }}</em></span>
+    {% endif %}
+    {% if user.get_profile.location %}
+      <span>Current location: <em>{{ user.get_profile.location }}</em></span>
+    {% endif %}
 </figure>

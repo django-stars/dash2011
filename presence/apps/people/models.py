@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 
 import datetime
 
+from workflow.models import StateLog
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, verbose_name=_("User"))
@@ -32,6 +34,30 @@ class Profile(models.Model):
         return self.user.get_full_name() if \
             self.user.get_full_name() else \
             self.user.username
+
+    @property
+    def state(self):
+        if not hasattr(self, '_state_log'):
+            self._state_log = StateLog.objects.get_user_current_state_log(
+                self.user
+            )
+        return self._state_log.state
+
+    @property
+    def location(self):
+        if not hasattr(self, '_state_log'):
+            self._state_log = StateLog.objects.get_user_current_state_log(
+                self.user
+            )
+        return self._state_log.location
+
+    @property
+    def project(self):
+        if not hasattr(self, '_state_log'):
+            self._state_log = StateLog.objects.get_user_current_state_log(
+                self.user
+            )
+        return self._state_log.project
 
 
 def create_profile(sender, **kwargs):
