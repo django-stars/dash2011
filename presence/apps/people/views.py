@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
 
-from forms import InviteForm, ProfileEditForm
+from forms import InviteForm, ProfileEditForm, PasswordChangeForm
 from activity.models import Activity
 
 import logging
@@ -65,6 +65,24 @@ def profile_edit(request):
     return render_to_response('people/profile-edit.html', {'form': form},
         RequestContext(request))
 
+
+@login_required
+def change_password(request):
+    user = request.user
+    if request.method == "POST":
+        form = PasswordChangeForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+    else:
+        form = PasswordChangeForm()
+    
+    data = {
+        'form': form
+    }
+    return render_to_response('people/change-password.html', data,
+        RequestContext(request))
 
 @login_required
 def profile_details(request, id):

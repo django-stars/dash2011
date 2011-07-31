@@ -39,3 +39,16 @@ class ProfileEditForm(forms.ModelForm):
         if users and (username != self._username):
             raise forms.ValidationError(_("This username is already taken!"))
         return username
+
+class PasswordChangeForm(forms.Form):
+    password = forms.CharField(_("Password"),
+        widget=forms.PasswordInput)
+    password1 = forms.CharField(_("Repeat password"),
+        widget=forms.PasswordInput)
+
+    def clean(self):
+        password = self.cleaned_data['password']
+        password1 = self.cleaned_data['password1']
+        if password1 != password1:
+            raise forms.ValidationError(_("Passwords doesn't match!"))
+        return self.cleaned_data
