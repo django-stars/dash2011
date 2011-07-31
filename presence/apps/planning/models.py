@@ -10,6 +10,7 @@ WORK_STATUS = (
     ('d', _('Day off'))
     )
 
+
 class UserPlanManager(models.Manager):
     def user_plans(user, days):
         """ Get per user future plans for defined number of days """
@@ -20,6 +21,7 @@ class UserPlanManager(models.Manager):
     def today_group_status():
         """ Return list of today states for all team """
         return self.filter(date=datetime.date.today())
+
 
 class DayPlan(models.Model):
     user = models.ForeignKey(User)
