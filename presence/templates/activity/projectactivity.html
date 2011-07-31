@@ -1,0 +1,16 @@
+{% extends 'activity/base.html' %}
+{% load i18n %}
+
+{% block activity-item %}
+  {% include "activity/_user.html" %}
+  {{ activity.render_action }}
+  {% if activity.old_project %}
+    {% blocktrans with old_project=activity.old_project new_project=activity.new_project  %}
+      from {{ old_project }} to {{ new_project }}
+    {% endblocktrans %}
+  {% else %}
+    {% blocktrans with new_project=activity.new_project  %}
+      to {{ new_project }}
+    {% endblocktrans %}
+  {% endif %}
+{% endblock activity-item %}

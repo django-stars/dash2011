@@ -1,0 +1,10 @@
+{% extends 'activity/base.html' %}
+{% load i18n %}
+
+{% block activity-item %}
+  {% include "activity/_user.html" %}
+  {{ activity.render_action }}
+  {% blocktrans with vote=activity.get_vote_display  %}
+    with {{ vote }}
+  {% endblocktrans %}
+{% endblock activity-item %}

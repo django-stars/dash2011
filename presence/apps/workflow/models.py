@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.conf import settings
 
+from workflow.signals import state_log_changed
 
 logger = logging.getLogger("presence.%s" % __name__)
 
@@ -140,10 +141,14 @@ class StateLog(models.Model):
                 self.user, str(now),
             )
         )
-        return StateLog.objects.create(
+        new_state_log = StateLog.objects.create(
             user=self.user, start=now, state=state,
             project=project, location=location
         )
+        state_log_changed.send(
+            sender=StateLog, old_state_log=self, new_state_log=new_state_log
+        )
+        return new_state_log
 
 
 #class TimeLog(models.Model):

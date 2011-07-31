@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from workflow.models import State, StateLog, NextState, Project, Location
+from workflow.activities import StateActivity
 
 
 class NextStateInline(admin.StackedInline):
@@ -23,3 +24,4 @@ admin.site.register(State, StateAdmin)
 admin.site.register(StateLog, StateLogAdmin)
 admin.site.register(Project)
 admin.site.register(Location)
+admin.site.register(StateActivity)

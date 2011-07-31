@@ -1,0 +1,7 @@
+{% block intro %}
+Last activity on our site:
+{% endblock %}
+
+{% for action in activity %}
+  {{ action.pretty_time }} - {{ action.render_email }}
+{% endfor %}

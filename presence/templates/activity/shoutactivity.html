@@ -1,0 +1,8 @@
+{% extends 'activity/base.html' %}
+{% load shout_tags %}
+
+{% block activity-item %}
+  {% include "activity/_user.html" %}
+  {{ activity.render_action }}
+  {{ activity.shout.message|linebreaksbr }}
+{% endblock activity-item %}

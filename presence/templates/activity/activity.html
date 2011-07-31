@@ -1,0 +1,12 @@
+{% load pagination_tags %} 
+
+{% autopaginate activity 15 %}
+<ul class="activity">
+  {% for action in activity %}
+    <li>
+      <div class="activity-item">{{ action.render }}</div>
+      <div class="time">{{ action.time }}</div>
+    </li>
+  {% endfor %}
+</ul>
+<div class="paginator"> {% paginate %} </div>

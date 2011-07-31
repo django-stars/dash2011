@@ -56,6 +56,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'presence.urls'
@@ -86,8 +87,10 @@ INSTALLED_APPS = (
     'django_extensions',
     'south',
     'fresh_media',
+    'pagination',
 
     # our apps
+    'activity',
     'people',
     'workflow',
     'activation',
@@ -96,7 +99,7 @@ INSTALLED_APPS = (
     'event',
 )
 
-LOCAL_DEVELOPMENT=True
+LOCAL_DEVELOPMENT = True
 
 AUTH_PROFILE_MODULE = 'people.Profile'
 

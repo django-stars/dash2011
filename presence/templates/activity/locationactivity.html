@@ -1,0 +1,16 @@
+{% extends 'activity/base.html' %}
+{% load i18n %}
+
+{% block activity-item %}
+  {% include "activity/_user.html" %}
+  {{ activity.render_action }}
+  {% if activity.old_location %}
+    {% blocktrans with old_location=activity.old_location new_location=activity.new_location  %}
+      from {{ old_location }} to {{ new_location }}
+    {% endblocktrans %}
+  {% else %}
+    {% blocktrans with new_location=activity.new_location  %}
+      to {{ new_location }}
+    {% endblocktrans %}
+  {% endif %}
+{% endblock activity-item %}
