@@ -36,28 +36,24 @@ class Profile(models.Model):
             self.user.username
 
     @property
-    def state(self):
+    def state_log(self):
         if not hasattr(self, '_state_log'):
             self._state_log = StateLog.objects.get_user_current_state_log(
                 self.user
             )
-        return self._state_log.state
+        return self._state_log
+
+    @property
+    def state(self):
+        return self.state_log.state
 
     @property
     def location(self):
-        if not hasattr(self, '_state_log'):
-            self._state_log = StateLog.objects.get_user_current_state_log(
-                self.user
-            )
-        return self._state_log.location
+        return self.state_log.location
 
     @property
     def project(self):
-        if not hasattr(self, '_state_log'):
-            self._state_log = StateLog.objects.get_user_current_state_log(
-                self.user
-            )
-        return self._state_log.project
+        return self.state_log.project
 
 
 def create_profile(sender, **kwargs):

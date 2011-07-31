@@ -15,6 +15,14 @@ class State(models.Model):
 
     name = models.CharField(_('name'), max_length=30)
     is_work_state = models.BooleanField(_('is work state?'), default=True, )
+    usual_duration = models.IntegerField(
+        _('normal duration(minutes)'), blank=True, null=True,
+        help_text=_("Usual durattion of this step. Leave empty if not possible to specify.")
+    )                                               
+    max_duration = models.IntegerField(
+        _('maximum duration(minutes)'), blank=True, null=True,
+        help_text=_("Maximum duration. If user is in this state more than max_duraction minutes, He will be asked to reset duration to 'usual duratin'.")
+    )
 
     class Meta:
         verbose_name = _('state')
@@ -87,7 +95,7 @@ class StateLog(models.Model):
     """Store information about state changes by users"""
 
     user = models.ForeignKey(User)
-    start = models.DateTimeField(auto_now_add=True)
+    start = models.DateTimeField()
     end = models.DateTimeField(blank=True, null=True)
     state = models.ForeignKey(State)
     project = models.ForeignKey(Project, blank=True, null=True)
@@ -105,7 +113,7 @@ class StateLog(models.Model):
             self.user, self.start, self.end, self.state
         )
 
-    def change_state(self, state=None, project=None, location=None):
+    def change_state(self, state=None, project=None, location=None, time=None):
         '''
         mark current state log as ended and
         create state log for new state
@@ -130,19 +138,19 @@ class StateLog(models.Model):
                 self.location, location, self.user
             ))
 
-        now = datetime.now()
+        time = time or datetime.now()
         logger.debug('Setting end value to "%s" for state log of user "%s"' % (
-            str(now), self.user
+            str(time), self.user
         ))
-        self.end = now
+        self.end = time
         self.save()
         logger.debug(
             'Creating new state log for user "%s" with start value "%s"' % (
-                self.user, str(now),
+                self.user, str(time),
             )
         )
         new_state_log = StateLog.objects.create(
-            user=self.user, start=now, state=state,
+            user=self.user, start=time, state=state,
             project=project, location=location
         )
         state_log_changed.send(

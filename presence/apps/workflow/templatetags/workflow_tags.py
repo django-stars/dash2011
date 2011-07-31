@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import template
 
 from workflow.models import StateLog
@@ -22,6 +24,7 @@ def workflow_forms(context):
         request.user, current_state_log,
         initial={'location': current_state_log.location}
     )
+
     return {
         'state_form': state_form,
         'project_form': project_form,
