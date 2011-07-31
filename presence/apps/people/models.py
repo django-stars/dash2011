@@ -48,9 +48,12 @@ def create_profile(sender, **kwargs):
         from activation.models import ActivationKey
         _key = ActivationKey.objects.create_key(user)
         link = reverse("activate-user", args=[_key.key])
-        send_mail('[Presence]', 'Be quiet! You have one shot! \n Here is approve link %s' % link,
+        send_mail(
+            '[Presence]',
+            'Be quiet! You have one shot! \n Here is approve link %s' % link,
             settings.DEFAULT_FROM_EMAIL,
-            [user.email], fail_silently=False)
+            [user.email], fail_silently=False
+            )
 
 post_save.connect(create_profile, sender=User,\
     dispatch_uid="create.profile.after.user")

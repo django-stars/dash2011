@@ -10,7 +10,9 @@ class InviteForm(forms.Form):
         email = self.cleaned_data['email']
         users = User.objects.filter(email=email)
         if users:
-            raise forms.ValidationError(_("User with this email already exists!"))
+            raise forms.ValidationError(
+                _("User with this email already exists!")
+                )
         return email
 
     def save(self):
@@ -20,3 +22,20 @@ class InviteForm(forms.Form):
             email=email
         )
         user.save()
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name')
+
+    def __init__(self, username, *args, **kwargs):
+        self._username = username
+        super(ProfileEditForm, self).__init__(*args, **kwargs)
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        users = User.objects.get(username=username)
+        if users and (username != self._username):
+            raise forms.ValidationError(_("This username is already taken!"))
+        return username
