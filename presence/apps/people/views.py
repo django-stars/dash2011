@@ -75,6 +75,8 @@ def change_password(request):
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
+            logger.info("Changed password for user %s" % user.username)
+            messages.info(request, "Password was changed!")
     else:
         form = PasswordChangeForm()
     

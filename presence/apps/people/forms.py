@@ -40,6 +40,7 @@ class ProfileEditForm(forms.ModelForm):
             raise forms.ValidationError(_("This username is already taken!"))
         return username
 
+
 class PasswordChangeForm(forms.Form):
     password = forms.CharField(_("Password"),
         widget=forms.PasswordInput)

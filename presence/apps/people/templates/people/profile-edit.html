@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
     <form action="." method="post" accept-charset="utf-8">
         {% csrf_token %}
         {{ form.as_p  }}
         <p><input type="submit" value="Continue &rarr;"></p>
     </form>
+    <span><a href="{% url change-password %}">{% trans "Change password" %}</a></span>
 {% endblock %}
