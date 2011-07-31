@@ -6,13 +6,14 @@ var Presence = (function(){
         }, // init
         makeShout: function(){
             var top_shout = $("form.shout");
+            var text_ = top_shout.find("textarea");
             $("#shout-action").click(function(){
                 if (top_shout.is(":visible")){
                     top_shout.slideUp();
                 }
                 else {
                     top_shout.slideDown();
-                    top_shout.find("textarea").focus();
+                    text_.focus();
                 }
                 return false;
             }); // click
@@ -22,10 +23,14 @@ var Presence = (function(){
                     this_.attr("action"),
                     this_.serialize(),
                     function(data){
-                        if (data){
+                        if (data.response == "OK"){
                             top_shout.slideUp();
+                            text_.val("");
                         }
-                    }) // post
+                        else {
+                            alert(data.reason);
+                        }
+                    }, "json") // post
                 return false;
             })
         }

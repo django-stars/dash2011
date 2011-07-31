@@ -1,4 +1,5 @@
 import logging
+import json
 
 from django.shortcuts import render_to_response
 from django.http import Http404
@@ -24,7 +25,12 @@ def shout_new(request):
         if form.is_valid():
             shout = form.save(user=request.user)
             logger.info('New %s shout from "%s"' % (('public', 'private')[shout.is_private], shout.user.username))
+            if request.is_ajax():
+                return HttpResponse(json.dumps({'response': 'OK'}))
             return HttpResponseRedirect(reverse('shout-list'))
+        else:
+            if request.is_ajax():
+                return HttpResponse(json.dumps({'response': 'ERR', 'reason': 'Shout text is required!'}))
     else:
         form = ShoutForm()
     
