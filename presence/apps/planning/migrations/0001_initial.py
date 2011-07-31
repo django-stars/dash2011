@@ -8,37 +8,26 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'ShoutActivity'
-        db.create_table('shout_shoutactivity', (
-            ('activity_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['activity.Activity'], unique=True, primary_key=True)),
-            ('shout', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['shout.Shout'])),
+        # Adding model 'DayPlan'
+        db.create_table('planning_dayplan', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('date', self.gf('django.db.models.fields.DateField')()),
+            ('work_status', self.gf('django.db.models.fields.CharField')(max_length=1)),
+            ('start_date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('end_date', self.gf('django.db.models.fields.TimeField')(null=True, blank=True)),
+            ('created', self.gf('django.db.models.fields.TimeField')(auto_now_add=True)),
         ))
-        db.send_create_signal('shout', ['ShoutActivity'])
+        db.send_create_signal('planning', ['DayPlan'])
 
 
     def backwards(self, orm):
         
-        # Deleting model 'ShoutActivity'
-        db.delete_table('shout_shoutactivity')
+        # Deleting model 'DayPlan'
+        db.delete_table('planning_dayplan')
 
 
     models = {
-        'activity.activity': {
-            'Meta': {'ordering': "('-time',)", 'object_name': 'Activity'},
-            'action': ('django.db.models.fields.IntegerField', [], {}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'data_for_template_cached': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.CharField', [], {'max_length': '36', 'primary_key': 'True'}),
-            'obj2_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj3_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj4_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj5_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'activity_for_user'", 'null': 'True', 'to': "orm['auth.User']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'activity'", 'to': "orm['auth.User']"})
-        },
         'auth.group': {
             'Meta': {'object_name': 'Group'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -75,21 +64,16 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'shout.shout': {
-            'Meta': {'ordering': "('-created',)", 'object_name': 'Shout'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+        'planning.dayplan': {
+            'Meta': {'ordering': "('-created',)", 'object_name': 'DayPlan'},
+            'created': ('django.db.models.fields.TimeField', [], {'auto_now_add': 'True'}),
+            'date': ('django.db.models.fields.DateField', [], {}),
+            'end_date': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_private': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'mentions': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'mentioned_in'", 'null': 'True', 'symmetrical': 'False', 'to': "orm['auth.User']"}),
-            'message': ('django.db.models.fields.TextField', [], {}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'shouts'", 'to': "orm['auth.User']"})
-        },
-        'shout.shoutactivity': {
-            'Meta': {'ordering': "('-time',)", 'object_name': 'ShoutActivity', '_ormbases': ['activity.Activity']},
-            'activity_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['activity.Activity']", 'unique': 'True', 'primary_key': 'True'}),
-            'shout': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['shout.Shout']"})
+            'start_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'work_status': ('django.db.models.fields.CharField', [], {'max_length': '1'})
         }
     }
 
-    complete_apps = ['shout']
+    complete_apps = ['planning']

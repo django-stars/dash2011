@@ -8,40 +8,29 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding field 'Activity.to_user'
-        db.add_column('activity_activity', 'to_user', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='activity_for_user', null=True, to=orm['auth.User']), keep_default=False)
+        # Adding model 'ActivationKey'
+        db.create_table('activation_activationkey', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('key', self.gf('django.db.models.fields.CharField')(unique=True, max_length=40)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+        ))
+        db.send_create_signal('activation', ['ActivationKey'])
 
 
     def backwards(self, orm):
         
-        # Deleting field 'Activity.to_user'
-        db.delete_column('activity_activity', 'to_user_id')
+        # Deleting model 'ActivationKey'
+        db.delete_table('activation_activationkey')
 
 
     models = {
-        'activity.activity': {
-            'Meta': {'ordering': "('-time',)", 'object_name': 'Activity'},
-            'action': ('django.db.models.fields.IntegerField', [], {}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'data_for_template_cached': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.CharField', [], {'max_length': '36', 'primary_key': 'True'}),
-            'obj2_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj3_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj4_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj5_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'obj_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
-            'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'activity_for_user'", 'null': 'True', 'to': "orm['auth.User']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'activity'", 'to': "orm['auth.User']"})
-        },
-        'activity.notifysettings': {
-            'Meta': {'ordering': "['user']", 'object_name': 'NotifySettings'},
-            'frequency': ('django.db.models.fields.IntegerField', [], {'default': '86400'}),
-            'id': ('django.db.models.fields.CharField', [], {'max_length': '36', 'primary_key': 'True'}),
-            'immediately': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['contenttypes.ContentType']", 'null': 'True', 'blank': 'True'}),
-            'last_sended': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'notify_settings'", 'unique': 'True', 'to': "orm['auth.User']"})
+        'activation.activationkey': {
+            'Meta': {'ordering': "('-created',)", 'object_name': 'ActivationKey'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'key': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '40'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -81,4 +70,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['activity']
+    complete_apps = ['activation']

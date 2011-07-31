@@ -14,6 +14,7 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='activity', to=orm['auth.User'])),
             ('time', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('public', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('to_user', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='activity_for_user', null=True, to=orm['auth.User'])),
             ('action', self.gf('django.db.models.fields.IntegerField')()),
             ('obj_id', self.gf('django.db.models.fields.CharField')(max_length=40, null=True, blank=True)),
             ('obj2_id', self.gf('django.db.models.fields.CharField')(max_length=40, null=True, blank=True)),
@@ -69,6 +70,7 @@ class Migration(SchemaMigration):
             'obj_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'activity_for_user'", 'null': 'True', 'to': "orm['auth.User']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'activity'", 'to': "orm['auth.User']"})
         },
         'activity.notifysettings': {

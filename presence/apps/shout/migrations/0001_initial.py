@@ -27,6 +27,13 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('shout_shout_mentions', ['shout_id', 'user_id'])
 
+        # Adding model 'ShoutActivity'
+        db.create_table('shout_shoutactivity', (
+            ('activity_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['activity.Activity'], unique=True, primary_key=True)),
+            ('shout', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['shout.Shout'])),
+        ))
+        db.send_create_signal('shout', ['ShoutActivity'])
+
 
     def backwards(self, orm):
         
@@ -36,8 +43,27 @@ class Migration(SchemaMigration):
         # Removing M2M table for field mentions on 'Shout'
         db.delete_table('shout_shout_mentions')
 
+        # Deleting model 'ShoutActivity'
+        db.delete_table('shout_shoutactivity')
+
 
     models = {
+        'activity.activity': {
+            'Meta': {'ordering': "('-time',)", 'object_name': 'Activity'},
+            'action': ('django.db.models.fields.IntegerField', [], {}),
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'data_for_template_cached': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.CharField', [], {'max_length': '36', 'primary_key': 'True'}),
+            'obj2_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj3_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj4_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj5_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'activity_for_user'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'activity'", 'to': "orm['auth.User']"})
+        },
         'auth.group': {
             'Meta': {'object_name': 'Group'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -83,6 +109,11 @@ class Migration(SchemaMigration):
             'message': ('django.db.models.fields.TextField', [], {}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'shouts'", 'to': "orm['auth.User']"})
+        },
+        'shout.shoutactivity': {
+            'Meta': {'ordering': "('-time',)", 'object_name': 'ShoutActivity', '_ormbases': ['activity.Activity']},
+            'activity_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['activity.Activity']", 'unique': 'True', 'primary_key': 'True'}),
+            'shout': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['shout.Shout']"})
         }
     }
 

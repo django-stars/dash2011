@@ -8,25 +8,22 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Location'
-        db.create_table('workflow_location', (
+        # Adding model 'Profile'
+        db.create_table('people_profile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
+            ('start_work', self.gf('django.db.models.fields.DateField')()),
+            ('vacation_days', self.gf('django.db.models.fields.PositiveIntegerField')(default=24)),
+            ('vacation_days_used', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
+            ('updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
-        db.send_create_signal('workflow', ['Location'])
-
-        # Adding field 'StateLog.location'
-        db.add_column('workflow_statelog', 'location', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['workflow.Location'], null=True, blank=True), keep_default=False)
+        db.send_create_signal('people', ['Profile'])
 
 
     def backwards(self, orm):
         
-        # Deleting model 'Location'
-        db.delete_table('workflow_location')
-
-        # Deleting field 'StateLog.location'
-        db.delete_column('workflow_statelog', 'location_id')
+        # Deleting model 'Profile'
+        db.delete_table('people_profile')
 
 
     models = {
@@ -66,42 +63,15 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'workflow.location': {
-            'Meta': {'object_name': 'Location'},
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+        'people.profile': {
+            'Meta': {'ordering': "('-updated',)", 'object_name': 'Profile'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
-        },
-        'workflow.nextstate': {
-            'Meta': {'object_name': 'NextState'},
-            'current_state': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'next_states'", 'to': "orm['workflow.State']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_default': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'next_state': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'previous_states'", 'to': "orm['workflow.State']"})
-        },
-        'workflow.project': {
-            'Meta': {'object_name': 'Project'},
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
-        },
-        'workflow.state': {
-            'Meta': {'ordering': "('name',)", 'object_name': 'State'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_work_state': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
-        },
-        'workflow.statelog': {
-            'Meta': {'ordering': "('start',)", 'object_name': 'StateLog'},
-            'end': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['workflow.Location']", 'null': 'True', 'blank': 'True'}),
-            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['workflow.Project']", 'null': 'True', 'blank': 'True'}),
-            'start': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['workflow.State']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'start_work': ('django.db.models.fields.DateField', [], {}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'}),
+            'vacation_days': ('django.db.models.fields.PositiveIntegerField', [], {'default': '24'}),
+            'vacation_days_used': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
         }
     }
 
-    complete_apps = ['workflow']
+    complete_apps = ['people']

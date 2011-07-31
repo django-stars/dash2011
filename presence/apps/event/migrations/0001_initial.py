@@ -14,6 +14,7 @@ class Migration(SchemaMigration):
             ('title', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('date', self.gf('django.db.models.fields.DateTimeField')()),
+            ('is_published', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('no_time', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('message', self.gf('django.db.models.fields.TextField')()),
         ))
@@ -32,6 +33,7 @@ class Migration(SchemaMigration):
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date': ('django.db.models.fields.DateTimeField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'message': ('django.db.models.fields.TextField', [], {}),
             'no_time': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50'})

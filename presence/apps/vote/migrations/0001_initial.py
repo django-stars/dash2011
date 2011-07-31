@@ -8,39 +8,49 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Project'
-        db.create_table('workflow_project', (
+        # Adding model 'UserVote'
+        db.create_table('vote_uservote', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('date', self.gf('django.db.models.fields.DateField')()),
+            ('vote', self.gf('django.db.models.fields.CharField')(max_length=2)),
         ))
-        db.send_create_signal('workflow', ['Project'])
+        db.send_create_signal('vote', ['UserVote'])
 
-        # Adding M2M table for field members on 'Project'
-        db.create_table('workflow_project_members', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm['workflow.project'], null=False)),
-            ('user', models.ForeignKey(orm['auth.user'], null=False))
+        # Adding model 'VoteActivity'
+        db.create_table('vote_voteactivity', (
+            ('activity_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['activity.Activity'], unique=True, primary_key=True)),
+            ('vote', self.gf('django.db.models.fields.CharField')(max_length=2)),
         ))
-        db.create_unique('workflow_project_members', ['project_id', 'user_id'])
-
-        # Adding field 'StateLog.project'
-        db.add_column('workflow_statelog', 'project', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['workflow.Project'], null=True, blank=True), keep_default=False)
+        db.send_create_signal('vote', ['VoteActivity'])
 
 
     def backwards(self, orm):
         
-        # Deleting model 'Project'
-        db.delete_table('workflow_project')
+        # Deleting model 'UserVote'
+        db.delete_table('vote_uservote')
 
-        # Removing M2M table for field members on 'Project'
-        db.delete_table('workflow_project_members')
-
-        # Deleting field 'StateLog.project'
-        db.delete_column('workflow_statelog', 'project_id')
+        # Deleting model 'VoteActivity'
+        db.delete_table('vote_voteactivity')
 
 
     models = {
+        'activity.activity': {
+            'Meta': {'ordering': "('-time',)", 'object_name': 'Activity'},
+            'action': ('django.db.models.fields.IntegerField', [], {}),
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'data_for_template_cached': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.CharField', [], {'max_length': '36', 'primary_key': 'True'}),
+            'obj2_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj3_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj4_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj5_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'obj_id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True', 'blank': 'True'}),
+            'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'activity_for_user'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'activity'", 'to': "orm['auth.User']"})
+        },
         'auth.group': {
             'Meta': {'object_name': 'Group'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -77,35 +87,18 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'workflow.nextstate': {
-            'Meta': {'object_name': 'NextState'},
-            'current_state': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'next_states'", 'to': "orm['workflow.State']"}),
+        'vote.uservote': {
+            'Meta': {'ordering': "('-date',)", 'object_name': 'UserVote'},
+            'date': ('django.db.models.fields.DateField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_default': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'next_state': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'previous_states'", 'to': "orm['workflow.State']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'vote': ('django.db.models.fields.CharField', [], {'max_length': '2'})
         },
-        'workflow.project': {
-            'Meta': {'object_name': 'Project'},
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
-        },
-        'workflow.state': {
-            'Meta': {'ordering': "('name',)", 'object_name': 'State'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_work_state': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
-        },
-        'workflow.statelog': {
-            'Meta': {'ordering': "('start',)", 'object_name': 'StateLog'},
-            'end': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['workflow.Project']", 'null': 'True', 'blank': 'True'}),
-            'start': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['workflow.State']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+        'vote.voteactivity': {
+            'Meta': {'ordering': "('-time',)", 'object_name': 'VoteActivity', '_ormbases': ['activity.Activity']},
+            'activity_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['activity.Activity']", 'unique': 'True', 'primary_key': 'True'}),
+            'vote': ('django.db.models.fields.CharField', [], {'max_length': '2'})
         }
     }
 
-    complete_apps = ['workflow']
+    complete_apps = ['vote']
