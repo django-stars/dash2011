@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from vote.forms import UserVoteForm
+from vote.models import UserVote
 
 import logging
 

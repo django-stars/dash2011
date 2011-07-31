@@ -23,6 +23,11 @@ class UserVoteManager(models.Manager):
             _vote.save()
         return _vote
 
+    def get_votes(self, user, days=7):
+        today = datetime.date.today()
+        _past = today - datetime.timedelta(days=days)
+        return self.filter(user=user, date__range=(_past, today))
+
 
 class UserVote(models.Model):
     user = models.ForeignKey(User,
