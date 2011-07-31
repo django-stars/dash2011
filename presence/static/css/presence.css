@@ -251,3 +251,11 @@ aside #user-info h1 {
   line-height: 1;
   padding: .25em .25em .25em 0;
 }
+footer {
+  font-size: .75em;
+  background: #5a6f85;
+  padding: .25em 0;
+  text-align: center;
+  border-top: .25em solid #455667;
+  color: #fff;
+}
