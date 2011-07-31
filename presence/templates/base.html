@@ -8,11 +8,13 @@
 </head>
 <body>
   <header>
-    <h1>Presence</h1>
+      {% shout_new_form %}
+      <h1><a href="/">Presence<span title="Like beta, but better!">hueta</span></a></h1>
+      <nav>
+        <a href="{% url shout-new %}" id="shout-action">Shout</a>
+        <a href="{% url logout %}">Logout</a>
+      </nav>
   </header>
-  <section id="shout-bar">
-  {% shout_new_form %}
-  </section>
   <div id="content">
     {% block content %}
     {% endblock content %}

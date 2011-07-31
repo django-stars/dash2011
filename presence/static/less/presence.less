@@ -1,19 +1,139 @@
 @import "reset.css";
 
 @body-bg: #f4f4f4;
+@link-fg: #3875d7;
+@header-bg: rgb(102, 102, 102);
 
 body {
-	background: @body-bg;
-	font: normal 1em/1.5 "Droid Sans", sans-serif;
+    background: @body-bg;
+    font: normal 1em/1.5 "Droid Sans", sans-serif;
+}
+
+a {
+    color: @link-fg;
+}
+
+.gradient(@from, @to) {
+    background-image: -moz-linear-gradient(@from, @to);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@from), to(@to));
+    background-image: -webkit-linear-gradient(@from, @to); 
+    background-image: -o-linear-gradient(@from, @to);
+}
+
+.button {
+    background: #f2f2f2;
+    height: 2.5em;
+    float: left;
+    font-size: .75em;
+    line-height: 2.5em;
+    padding: .25em .5em;
+    border-radius: .25em;
+    color: #222;
+    text-decoration: none;
+    box-shadow: 0 0 .125em #222;
+    
+    &:hover {
+        box-shadow: 0 0 .25em #444;
+        background: #fff;
+    }
+}
+
+a.create {
+    .button
 }
 
 header {
-	h1 {
-		position: absolute;
-		color: #ccc;
-		font: normal 2em/1 "Lucida Grande", sans-serif;
-		letter-spacing: -0.075em ;
-	}
+    background: @header-bg;
+    .gradient(lighten(@header-bg, 10%), @header-bg);
+    border-bottom: .25em solid #555;
+    box-shadow: 0 0 .5em #222;
+    position: relative;
+    padding: 0 1em;
+    
+    a {
+        text-decoration: none;
+    }
+    
+    h1 {
+        clear: both;
+        font: normal 1.5em/1 "Droid Sans", "Lucida Grande", sans-serif;
+        letter-spacing: -0.075em;
+        height: 2em;
+        line-height: 2em;
+
+        a {
+            color: #f2f2f2;
+            text-shadow: 0 0 .125em #fff;
+            position: relative;
+
+            span {
+                font-size: .2em;
+                position: absolute;
+                top: -.5em;
+                right: -.5em;
+                color: #fff;
+                background: @link-fg;
+                display: block;
+                height: 1.5em;
+                line-height: 1.5em;
+                padding: 0 .5em;
+                border-radius: .25em;
+                letter-spacing: 0;
+            }
+        }        
+    }
+    
+    nav {
+        position: absolute;
+        right: 1em;
+        bottom: 0;
+        height: 2.5em;
+        line-height: 2.5em;
+        
+        a {
+            color: #fff;
+            font-size: .8em;
+            padding: 0 1em;
+            border-left: 1px solid #999;
+            
+            &:first-child {
+                border: none;
+            }
+            
+            &:hover {
+                color: #eee;
+                text-shadow: 0 0 .25em #fff;
+            }
+        }
+        
+    }
+    
+    form.shout {
+        display: none;
+        width: 100%;
+        padding: 1em 0;
+        border-bottom: .25em solid #999;
+        
+        textarea {
+            height: 2em;
+            width: 100%;
+            background: rgb(229, 229, 229);
+            color: #444;
+            resize: vertical;
+            max-height: 10em;
+            border: none;
+        }
+        
+        p:not(.controls) {
+            background: rgb(229, 229, 229);
+            padding: .5em;
+            border-radius: .25em;
+        }
+        
+        p.controls {
+            clear: both;
+        }
+    }
 }
 
 #content {

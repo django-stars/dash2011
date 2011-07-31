@@ -3,11 +3,123 @@ body {
   background: #f4f4f4;
   font: normal 1em/1.5 "Droid Sans", sans-serif;
 }
+a {
+  color: #3875d7;
+}
+.button {
+  background: #f2f2f2;
+  height: 2.5em;
+  float: left;
+  font-size: .75em;
+  line-height: 2.5em;
+  padding: .25em .5em;
+  border-radius: .25em;
+  color: #222;
+  text-decoration: none;
+  box-shadow: 0 0 .125em #222;
+}
+.button:hover {
+  box-shadow: 0 0 .25em #444;
+  background: #fff;
+}
+a.create {
+  background: #f2f2f2;
+  height: 2.5em;
+  float: left;
+  font-size: .75em;
+  line-height: 2.5em;
+  padding: .25em .5em;
+  border-radius: .25em;
+  color: #222;
+  text-decoration: none;
+  box-shadow: 0 0 .125em #222;
+}
+a.create:hover {
+  box-shadow: 0 0 .25em #444;
+  background: #fff;
+}
+header {
+  background: #666666;
+  background-image: -moz-linear-gradient(#808080, #666666);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#808080), to(#666666));
+  background-image: -webkit-linear-gradient(#808080, #666666);
+  background-image: -o-linear-gradient(#808080, #666666);
+  border-bottom: .25em solid #555;
+  box-shadow: 0 0 .5em #222;
+  position: relative;
+  padding: 0 1em;
+}
+header a {
+  text-decoration: none;
+}
 header h1 {
-  position: absolute;
-  color: #ccc;
-  font: normal 2em/1 "Lucida Grande", sans-serif;
+  clear: both;
+  font: normal 1.5em/1 "Droid Sans", "Lucida Grande", sans-serif;
   letter-spacing: -0.075em;
+  height: 2em;
+  line-height: 2em;
+}
+header h1 a {
+  color: #f2f2f2;
+  text-shadow: 0 0 .125em #fff;
+  position: relative;
+}
+header h1 a span {
+  font-size: .2em;
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  color: #fff;
+  background: #3875d7;
+  display: block;
+  height: 1.5em;
+  line-height: 1.5em;
+  padding: 0 .5em;
+  border-radius: .25em;
+  letter-spacing: 0;
+}
+header nav {
+  position: absolute;
+  right: 1em;
+  bottom: 0;
+  height: 2.5em;
+  line-height: 2.5em;
+}
+header nav a {
+  color: #fff;
+  font-size: .8em;
+  padding: 0 1em;
+  border-left: 1px solid #999;
+}
+header nav a:first-child {
+  border: none;
+}
+header nav a:hover {
+  color: #eee;
+  text-shadow: 0 0 .25em #fff;
+}
+header form.shout {
+  display: none;
+  width: 100%;
+  padding: 1em 0;
+  border-bottom: .25em solid #999;
+}
+header form.shout textarea {
+  height: 2em;
+  width: 100%;
+  background: #e5e5e5;
+  color: #444;
+  resize: vertical;
+  max-height: 10em;
+  border: none;
+}
+header form.shout p:not(.controls) {
+  background: #e5e5e5;
+  padding: .5em;
+  border-radius: .25em;
+}
+header form.shout p.controls {
+  clear: both;
 }
 #content {
   margin: 0 1em 0 16em;
