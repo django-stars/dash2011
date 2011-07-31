@@ -113,6 +113,7 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/logout/"
 
 DEFAULT_FROM_EMAIL = "presence@djangostars.com"
+SHOUT_CONVERT_URL = True
 
 try:
     from settings_local import *

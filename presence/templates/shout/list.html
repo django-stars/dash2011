@@ -11,7 +11,7 @@
 				<a href="{{shout.user.get_absolute_url}}" class="user">{{shout.user.get_full_name|default:shout.user.username}}</a>
 				<time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
 			<p>
-			{{shout.message|linebreaksbr}}
+			{{shout.message|safe}}
 			<a href="{{shout.get_absolute_url}}" class="permalink">#</a>
 		</li>
 	{% endfor %}
