@@ -3,7 +3,7 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from django.core.mail import send_mail
 from django.contrib.contenttypes.models import ContentType
@@ -154,6 +154,16 @@ class Activity(models.Model):
     def mark_for_update(self):
         self.data_for_template_cached = None
         self.save()
+
+    @property
+    def pretty_date(self):
+        today = date.today()
+        if self.time.date() == today:
+            return _('Today')
+        elif self.time.date() == today - timedelta(days=1):
+            return _('Yesterday')
+        else:
+            return False
 
 
 class NotifySettings(models.Model):

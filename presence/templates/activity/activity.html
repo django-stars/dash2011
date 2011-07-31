@@ -11,7 +11,13 @@
 {% for action in activity %}
 <ul>
     {% ifchanged action.time|date:"Ymd" %}
-    <li class="date">{{action.time|date:"l, d F Y"}}</li>
+    <li class="date">
+      {% if action.pretty_date %}
+        {{action.pretty_date}}
+      {% else %}
+        {{action.time|date:"l, d F Y"}}
+      {% endif %}
+    </li>
     {% endifchanged %}
     <li{% if activity.user == user%} class="my"{% endif %}>
         <span class="time">{{action.time|date:"H:i"}}</span>
