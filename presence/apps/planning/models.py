@@ -34,8 +34,10 @@ class DayPlan(models.Model):
     date = models.DateField(_("Date"))
     work_status = models.CharField(_("Work status"),
         max_length=1, choices=WORK_STATUS)
-    start_date = models.TimeField(blank=True, null=True)
-    end_date = models.TimeField(blank=True, null=True)
+    start_date = models.TimeField(blank=True, null=True,
+        verbose_name=_("Start time"))
+    end_date = models.TimeField(blank=True, null=True,
+        verbose_name=_("End time"))
     created = models.DateTimeField(auto_now_add=True)
 
     objects = UserPlanManager()
