@@ -153,37 +153,49 @@ body > header {
     form.shout {
         display: none;
         width: 100%;
-        padding: 1em 0;
+        padding: .5em 0;
         border-bottom: .25em solid #999;
         
         textarea {
             height: 2em;
             width: 100%;
-            background: rgb(229, 229, 229);
+            background: lighten(@header-bg, 90%);
             color: #444;
             resize: vertical;
             max-height: 10em;
             border: none;
+            font-family: "Georgia", sans-serif;
+            
+            &:focus {
+                outline: none;
+            }
         }
         
         p:not(.controls) {
-            background: rgb(229, 229, 229);
-            padding: .5em;
+            background: lighten(@header-bg, 90%);
+            padding: .25em .5em;
             margin: .5em 1em;
-            border-radius: .5em;
+            border-radius: .125em;
         }
         
         p.controls {
             clear: both;
+            padding: 0 1em;
+            text-align: right;
+            
+            .help {
+                font-size: .8em;
+                color: lighten(@header-bg, 30%);
+            }
         }
     }
 }
 
 #content {
-	margin: 5em 1em 1em 20em;
-	box-shadow: .125em .125em .5em #222;
-	border-radius: .25em;
-	background: #fff;
+    margin: 5em 1em 1em 20em;
+    //box-shadow: .125em .125em .5em #222;
+    //border-radius: .25em;
+    //background: #fff;
 }
 
 #bar {
@@ -205,12 +217,12 @@ body > header {
 	    padding: 1.5em 1em .5em;
 	    margin-bottom: 1em;
 	    height: 1.75em;
+
 	    h1 {
 	        float: left;
 	        font-weight: bold;
-	        font-size: 1.25em;
+	        font-size: 1.5em;
 	        letter-spacing: -.0125em;
-	        
 	    }
 	    
 	    span.updated {
@@ -223,19 +235,25 @@ body > header {
 	}
 
 	li {
-        border-bottom: 1px solid #ddd;
+        //border-bottom: 1px solid #ddd;
         padding: .5em 1em 1em;
         position: relative;
+        background: #fff;
+        margin-bottom: .125em;
+        border-radius: .125em;
         
         &.my {
             background: #eee;
         }
         
         &.date {
-            font-size: 1.1em;
+            font-size: 1.25em;
             text-align: center;
             color: #999;
+            text-shadow: 0 0 1px #fff;
             margin-top: 1em;
+            letter-spacing: -.07em;
+            background: none;
         }
         
         span.time {
