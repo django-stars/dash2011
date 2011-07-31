@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load i18n people_tags %}
 
-{% block content %}
+{% block aside %}
     {% profile_info user.username %}
+{% endblock aside %}
+{% block content %}
     {% include "activity/activity.html" %}
 {% endblock  %}

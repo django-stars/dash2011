@@ -5,8 +5,11 @@
 <section id="user-info">
 <img src="{% gravatar user.email 96 %}" alt="">
 <h1><a href="{{ user.get_profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a></h1>
-{% user_plans user.username %}
-<a id="plan-link" href="{% url planning %}">Plan something</a>
+<p><span class="state">{{ user.get_profile.state }}</span></p>
+<article class="plan">
+    <p><a id="plan-link" href="{% url planning %}">Plan something</a></p>
+    {% user_plans user.username %}
+</article>
 </section>
 <div id="voting">
   <form action="{% url vote %}" method="post" accept-charset="utf-8">

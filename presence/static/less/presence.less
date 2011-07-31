@@ -293,18 +293,30 @@ body > header {
 }
 
 aside {
-    margin: 5em 0 1em 1em;
+    margin: 1em 0 1em 1em;
     float: left;
     width: 18em;
-    box-shadow: .125em .125em .5em #222;
-    border-radius: .25em;
     overflow: hidden;
+    
+    .state {
+        color: #fff;
+        background: @header-bg;
+        padding: .25em .5em;
+        border-radius: .25em;
+        font-size: .8em;
+    }
+    
+    .plan {
+        clear: left;
+        margin-top: 1.5em;
+    }
     
     #user-info {
         
         img {
             float: left;
             margin-right: .5em;
+            box-shadow: 0 0 .5em #fff;
         }
         
         h1 {

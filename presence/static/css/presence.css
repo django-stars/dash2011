@@ -246,16 +246,26 @@ body > header form.shout p.controls .help {
   border-radius: .5em;
 }
 aside {
-  margin: 5em 0 1em 1em;
+  margin: 1em 0 1em 1em;
   float: left;
   width: 18em;
-  box-shadow: .125em .125em .5em #222;
-  border-radius: .25em;
   overflow: hidden;
+}
+aside .state {
+  color: #fff;
+  background: #5a6f85;
+  padding: .25em .5em;
+  border-radius: .25em;
+  font-size: .8em;
+}
+aside .plan {
+  clear: left;
+  margin-top: 1.5em;
 }
 aside #user-info img {
   float: left;
   margin-right: .5em;
+  box-shadow: 0 0 .5em #fff;
 }
 aside #user-info h1 {
   font-size: 1.5em;
