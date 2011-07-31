@@ -20,7 +20,6 @@ class UserVoteManager(models.Manager):
             _vote.save()
         except:
             _vote = self.create(user=user, date=date, vote=vote)
-            _vote.save()
         return _vote
 
     def get_votes(self, user, days=7):
