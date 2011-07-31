@@ -9,7 +9,7 @@
                 <span>{{ user.get_full_name|default:user.username }}</span>
                 <span>{% trans "Currently: " %}{{ user.get_profile.state }}</span>
                 {% if user.get_profile.get_mood %}
-                    <span>Mood: {{ user.get_profile.get_mood }}</span>
+                    <span>Mood: {{ user.get_profile.get_mood.get_vote_display }}</span>
                 {% endif %}
             </div>
         {% endfor %}
