@@ -4,6 +4,10 @@ from django.contrib.auth.decorators import login_required
 
 from vote.forms import UserVoteForm
 
+import logging
+
+logger = logging.getLogger("presence.%s" % __name__)
+
 @login_required
 def dashboard(request):
     data = {

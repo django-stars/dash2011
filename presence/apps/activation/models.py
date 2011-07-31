@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 import uuid
+import logging
+
+logger = logging.getLogger("presence.%s" % __name__)
 
 
 class NoKeyFound(Exception):
@@ -16,6 +19,8 @@ def _generate_key():
 class ActivationKeyManager(models.Manager):
     def create_key(self, user):
         key = self.create(user=user, key=_generate_key())
+        logger.info("Generated new key %s for user %s" % \
+            (user.username, key.key))
         return key
 
     def activate_user(self, key):
@@ -25,7 +30,10 @@ class ActivationKeyManager(models.Manager):
             user.is_active = True
             user.save()
             return _key
+            logger.info("Activated user %s using key %s" % \
+                (user.username, _key.key))
         except self.DoesNotExist:
+            logger.exeption("No user found with key %s" % key)
             raise NoKeyFound
 
 
