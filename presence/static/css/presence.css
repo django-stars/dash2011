@@ -39,12 +39,12 @@ a.create:hover {
   background: #fff;
 }
 body > header {
-  background: #666666;
-  background-image: -moz-linear-gradient(#808080, #666666);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#808080), to(#666666));
-  background-image: -webkit-linear-gradient(#808080, #666666);
-  background-image: -o-linear-gradient(#808080, #666666);
-  border-bottom: .25em solid #555;
+  background: #5a6f85;
+  background-image: -moz-linear-gradient(#7288a0, #5a6f85);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7288a0), to(#5a6f85));
+  background-image: -webkit-linear-gradient(#7288a0, #5a6f85);
+  background-image: -o-linear-gradient(#7288a0, #5a6f85);
+  border-bottom: 0.25em solid #455667;
   box-shadow: 0 0 .5em #222;
   position: fixed;
   width: 100%;
@@ -203,4 +203,22 @@ body > header form.shout p.controls {
   background: #aaa;
   padding: .25em .5em;
   border-radius: .5em;
+}
+aside {
+  margin: 5em 0 1em 1em;
+  float: left;
+  width: 18em;
+  box-shadow: .125em .125em .5em #222;
+  border-radius: .25em;
+  overflow: hidden;
+}
+aside #user-info img {
+  float: left;
+  margin-right: .5em;
+}
+aside #user-info h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1;
+  padding: .25em .25em .25em 0;
 }

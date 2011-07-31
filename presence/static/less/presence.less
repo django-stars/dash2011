@@ -2,7 +2,8 @@
 
 @body-bg: #f4f4f4;
 @link-fg: #3875d7;
-@header-bg: rgb(102, 102, 102);
+//@header-bg: rgb(102, 102, 102);
+@header-bg: rgb(90, 111, 133);
 
 body {
     background: @body-bg;
@@ -46,7 +47,7 @@ a.create {
 body > header {
     background: @header-bg;
     .gradient(lighten(@header-bg, 10%), @header-bg);
-    border-bottom: .25em solid #555;
+    border-bottom: .25em solid darken(@header-bg, 10%);
     box-shadow: 0 0 .5em #222;
     position: fixed;
     width: 100%;
@@ -236,4 +237,29 @@ body > header {
 		padding: .25em .5em;
 		border-radius: .5em;
 	}
+}
+
+aside {
+    margin: 5em 0 1em 1em;
+    float: left;
+    width: 18em;
+    box-shadow: .125em .125em .5em #222;
+    border-radius: .25em;
+    overflow: hidden;
+    
+    #user-info {
+        
+        img {
+            float: left;
+            margin-right: .5em;
+        }
+        
+        h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+            line-height: 1;
+            padding: .25em .25em .25em 0;
+        }
+        
+    }
 }
