@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 
 import datetime
 
@@ -74,6 +75,8 @@ def create_profile(sender, **kwargs):
         from activation.models import ActivationKey
         _key = ActivationKey.objects.create_key(user)
         link = reverse("activate-user", args=[_key.key])
+        domain = Site.objects.get_current().domain
+        link = "http://" + domain + link
         send_mail(
             '[Presence]',
             'Be quiet! You have one shot! \n Here is approve link %s' % link,
