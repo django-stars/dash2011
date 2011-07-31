@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 import datetime
 
 WORK_STATUS = (
-    ('w', _('Will work from home')),
-    ('a', _('Will be avaliable')),
-    ('d', _('Day off'))
+    ('w', _('work from home')),
+    ('a', _('be avaliable')),
+    ('d', _('take day off'))
     )
 
 
@@ -34,9 +34,9 @@ class DayPlan(models.Model):
     date = models.DateField(_("Date"))
     work_status = models.CharField(_("Work status"),
         max_length=1, choices=WORK_STATUS)
-    start_date = models.DateTimeField(blank=True, null=True)
+    start_date = models.TimeField(blank=True, null=True)
     end_date = models.TimeField(blank=True, null=True)
-    created = models.TimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     objects = UserPlanManager()
 

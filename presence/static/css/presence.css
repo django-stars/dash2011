@@ -267,3 +267,10 @@ footer {
 #modal .close-modal {
   float: right;
 }
+.plan-date {
+  font-size: 0.7em;
+  color: #fff;
+  background: #ADD8E6;
+  padding: 0.3em 0.5em;
+  border-radius: 0.4em;
+}

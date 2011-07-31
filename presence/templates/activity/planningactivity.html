@@ -1,0 +1,8 @@
+{% extends 'activity/base.html' %}
+{% load i18n %}
+
+{% block activity-item %}
+  {% include "activity/_user.html" %}
+  <em class="plan-date">{{ activity.plan.date|date:'Y-m-d' }}</em>
+  {% trans "planning to" %} {{ activity.plan.get_work_status_display }}
+{% endblock activity-item %}
