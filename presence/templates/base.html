@@ -1,4 +1,4 @@
-<!doctype html>{% load freshmedia shout_tags %}
+<!doctype html>{% load freshmedia shout_tags workflow_tags %}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,14 +10,17 @@
   <header>
       {% shout_new_form %}
       <h1><a href="/">Presence<span title="Like beta, but better!">hueta</span></a></h1>
+      <article>
+          <!-- {% workflow_forms %} -->
+      </article>
       <nav>
         <a href="{% url shout-new %}" id="shout-action">Shout</a>
         <a href="{% url logout %}">Logout</a>
       </nav>
   </header>
+  <aside>{% block aside %}{% endblock aside %}</aside>
   <div id="content">
-    {% block content %}
-    {% endblock content %}
+      {% block content %}{% endblock content %}
   </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
   <script>window.jQuery || document.write("<script src='{% static "js/jquery.js" %}'>\x3C/script>")</script>

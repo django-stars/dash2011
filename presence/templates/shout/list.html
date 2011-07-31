@@ -1,23 +1,33 @@
 {% extends "base.html" %}
-{% load shout_tags %}
+{% load shout_tags people_tags %}
 {% block content %}
-<h1>Shout list</h1>
 <section id="shouts">
-	{% if shouts %}
-	<ul>
-	{% for shout in shouts %}
-		<li>{% if shout.is_private %}<b>!</b>{% endif %}
-			<p>
-				<a href="{{shout.user.get_absolute_url}}" class="user">{{shout.user.get_full_name|default:shout.user.username}}</a>
-				<time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
-			<p>
-			{{shout.message|safe}}
-			<a href="{{shout.get_absolute_url}}" class="permalink">#</a>
-		</li>
-	{% endfor %}
-	</ul>
-	{% else %}
-	<p class="empty">There are no shouts yet. You can be first one.</p>
-	{% endif %}
+    <header>
+    <h1>People shouts</h1>
+    <span class="updated">
+        <time datetime="{% now "c" %}" class="relative">{% now "c" %}</time>
+    </span>
+    </header>
+    {% if shouts %}
+    <ul>
+        {% for shout in shouts %}
+        {% ifchanged shout.created|date:"Ymd" %}
+        <li class="date">{{shout.created|date:"l, d F Y"}}</li>
+        {% endifchanged %}
+        <li{% if shout.user == user%} class="my"{% endif %}>{% if shout.is_private %}<b>!</b>{% endif %}
+            <span class="time">{{shout.created|date:"H:i"}}</span>
+            <article>{{shout.message|safe}}</article>
+            <p class="headline">
+                <img src="{% gravatar shout.user.email 16 %}" alt=""/>
+                <a href="{{shout.user.get_absolute_url}}" class="user">{{shout.user.get_full_name|default:shout.user.username}}</a>
+                <time datetime="{{shout.created|date:"c"}}" class="relative">{{shout.created}}</time>
+                <a href="{{shout.get_absolute_url}}" class="permalink">#</a>
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">There are no shouts yet. You can be first one.</p>
+    {% endif %}
 </section>
 {% endblock content %}

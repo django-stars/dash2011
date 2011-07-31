@@ -38,7 +38,7 @@ a.create:hover {
   box-shadow: 0 0 .25em #444;
   background: #fff;
 }
-header {
+body > header {
   background: #666666;
   background-image: -moz-linear-gradient(#808080, #666666);
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#808080), to(#666666));
@@ -46,25 +46,29 @@ header {
   background-image: -o-linear-gradient(#808080, #666666);
   border-bottom: .25em solid #555;
   box-shadow: 0 0 .5em #222;
-  position: relative;
-  padding: 0 1em;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 0;
+  z-index: 999;
 }
-header a {
+body > header a {
   text-decoration: none;
 }
-header h1 {
+body > header h1 {
   clear: both;
   font: normal 1.5em/1 "Droid Sans", "Lucida Grande", sans-serif;
   letter-spacing: -0.075em;
   height: 2em;
   line-height: 2em;
+  margin-left: .75em;
 }
-header h1 a {
+body > header h1 a {
   color: #f2f2f2;
   text-shadow: 0 0 .125em #fff;
   position: relative;
 }
-header h1 a span {
+body > header h1 a span {
   font-size: .2em;
   position: absolute;
   top: -0.5em;
@@ -78,33 +82,33 @@ header h1 a span {
   border-radius: .25em;
   letter-spacing: 0;
 }
-header nav {
+body > header nav {
   position: absolute;
   right: 1em;
   bottom: 0;
   height: 2.5em;
   line-height: 2.5em;
 }
-header nav a {
+body > header nav a {
   color: #fff;
   font-size: .8em;
   padding: 0 1em;
   border-left: 1px solid #999;
 }
-header nav a:first-child {
+body > header nav a:first-child {
   border: none;
 }
-header nav a:hover {
+body > header nav a:hover {
   color: #eee;
   text-shadow: 0 0 .25em #fff;
 }
-header form.shout {
+body > header form.shout {
   display: none;
   width: 100%;
   padding: 1em 0;
   border-bottom: .25em solid #999;
 }
-header form.shout textarea {
+body > header form.shout textarea {
   height: 2em;
   width: 100%;
   background: #e5e5e5;
@@ -113,16 +117,21 @@ header form.shout textarea {
   max-height: 10em;
   border: none;
 }
-header form.shout p:not(.controls) {
+body > header form.shout p:not(.controls) {
   background: #e5e5e5;
   padding: .5em;
-  border-radius: .25em;
+  margin: .5em 1em;
+  border-radius: .5em;
 }
-header form.shout p.controls {
+body > header form.shout p.controls {
   clear: both;
 }
 #content {
-  margin: 0 1em 0 16em;
+  margin: 5em 1em 1em 16em;
+  display: table;
+  box-shadow: .125em .125em .5em #222;
+  border-radius: .25em;
+  background: #fff;
 }
 #bar {
   background: #444;
@@ -134,20 +143,64 @@ header form.shout p.controls {
 #bar textarea {
   height: 2em;
 }
-#shouts {
-  background: #fff;
+#shouts header {
+  border-bottom: .25em solid #eee;
+  padding: 1.5em 1em .5em;
+  margin-bottom: 1em;
+  height: 1.75em;
+}
+#shouts header h1 {
+  float: left;
+  font-weight: bold;
+  font-size: 1.25em;
+  letter-spacing: -0.0125em;
+}
+#shouts header span.updated {
+  float: right;
 }
 #shouts ul {
   list-style: none;
 }
 #shouts li {
-  border: 1px solid #ddd;
-  margin-bottom: .5em;
+  border-bottom: 1px solid #ddd;
+  padding: .5em 1em 1em;
+  position: relative;
+}
+#shouts li.my {
+  background: #eee;
+}
+#shouts li.date {
+  font-size: 1.1em;
+  text-align: center;
+  color: #999;
+  margin-top: 1em;
+}
+#shouts li span.time {
+  position: absolute;
+  left: 1em;
+  width: 3em;
+  text-align: center;
+  top: 1em;
+  font-size: .75em;
+  color: #999;
+  text-shadow: 0 0 1px #fff;
+}
+#shouts li p.headline {
+  font-size: .75em;
+  margin: .5em 0 0 4em;
+}
+#shouts li p.headline img {
+  float: left;
+  margin-right: .5em;
+}
+#shouts li article {
+  margin-left: 3em;
+  font-family: "Georgia", sans;
 }
 #shouts time {
   font-size: .75em;
   color: #fff;
-  background: #999;
+  background: #aaa;
   padding: .25em .5em;
   border-radius: .5em;
 }

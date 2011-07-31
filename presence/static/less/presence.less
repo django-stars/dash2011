@@ -42,13 +42,17 @@ a.create {
     .button
 }
 
-header {
+// we can refactor this, by giving main header an #
+body > header {
     background: @header-bg;
     .gradient(lighten(@header-bg, 10%), @header-bg);
     border-bottom: .25em solid #555;
     box-shadow: 0 0 .5em #222;
-    position: relative;
-    padding: 0 1em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding: 0;
+    z-index: 999;
     
     a {
         text-decoration: none;
@@ -60,6 +64,7 @@ header {
         letter-spacing: -0.075em;
         height: 2em;
         line-height: 2em;
+        margin-left: .75em;
 
         a {
             color: #f2f2f2;
@@ -127,7 +132,8 @@ header {
         p:not(.controls) {
             background: rgb(229, 229, 229);
             padding: .5em;
-            border-radius: .25em;
+            margin: .5em 1em;
+            border-radius: .5em;
         }
         
         p.controls {
@@ -137,7 +143,11 @@ header {
 }
 
 #content {
-	margin: 0 1em 0 16em;
+	margin: 5em 1em 1em 16em;
+	display: table;
+	box-shadow: .125em .125em .5em #222;
+	border-radius: .25em;
+	background: #fff;
 }
 
 #bar {
@@ -153,21 +163,76 @@ header {
 }
 
 #shouts {
-	background: #fff;
+	
+	header {
+	    border-bottom: .25em solid #eee;
+	    padding: 1.5em 1em .5em;
+	    margin-bottom: 1em;
+	    height: 1.75em;
+	    h1 {
+	        float: left;
+	        font-weight: bold;
+	        font-size: 1.25em;
+	        letter-spacing: -.0125em;
+	        
+	    }
+	    
+	    span.updated {
+	        float: right;
+	    }
+	}
 
 	ul {
-		list-style: none;
+      list-style: none;
 	}
 
 	li {
-		border: 1px solid #ddd;
-		margin-bottom: .5em;
+        border-bottom: 1px solid #ddd;
+        padding: .5em 1em 1em;
+        position: relative;
+        
+        &.my {
+            background: #eee;
+        }
+        
+        &.date {
+            font-size: 1.1em;
+            text-align: center;
+            color: #999;
+            margin-top: 1em;
+        }
+        
+        span.time {
+            position: absolute;
+            left: 1em;
+            width: 3em;
+            text-align: center;
+            top: 1em;
+            font-size: .75em;
+            color: #999;
+            text-shadow: 0 0 1px #fff;
+        }
+
+        p.headline {
+	        font-size: .75em;
+	        margin: .5em 0 0 4em;
+	        
+		    img {
+		        float: left;
+		        margin-right: .5em;
+		    }
+		}
+		
+		article {
+		    margin-left: 3em;
+            font-family: "Georgia", sans;
+		}
 	}
 
 	time {
 		font-size: .75em;
 		color: #fff;
-		background: #999;
+		background: #aaa;
 		padding: .25em .5em;
 		border-radius: .5em;
 	}

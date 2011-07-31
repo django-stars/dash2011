@@ -81,7 +81,6 @@ html { overflow-y: scroll; }
 /* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active { outline: none; }
 
-ul, ol { margin-left: 2em; }
 ol { list-style-type: decimal; }
 
 /* Remove margins for navigation lists */
