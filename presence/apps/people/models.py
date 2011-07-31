@@ -10,6 +10,7 @@ from django.contrib.sites.models import Site
 import datetime
 
 from workflow.models import StateLog
+from vote.models import UserVote
 
 
 class Profile(models.Model):
@@ -59,6 +60,14 @@ class Profile(models.Model):
     @property
     def project(self):
         return self.state_log.project
+
+    @property
+    def get_mood(self):
+        try:
+            mood = UserVote.objects.get_votes(self.user, 0)[0]
+        except IndexError:
+            mood = None
+        return mood
 
 
 def create_profile(sender, **kwargs):

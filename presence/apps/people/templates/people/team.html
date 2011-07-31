@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n people_tags %}
+
+{% block content %}
+    <div class="team-list">
+        {% for user in users %}
+            <div class="member">
+                <img src="{% gravatar user.email  100 %}" alt="{{ user.get_full_name }}">
+                <span>{{ user.get_full_name|default:user.username }}</span>
+                <span>{% trans "Currently: " %}{{ user.get_profile.state }}</span>
+                {% if user.get_profile.get_mood %}
+                    <span>Mood: {{ user.get_profile.get_mood }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content  %}

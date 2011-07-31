@@ -74,3 +74,16 @@ def profile_details(request, id):
     }
     return render_to_response('people/profile-details.html', data,
         RequestContext(request))
+
+
+@login_required
+def team_list(request):
+    users = User.objects.filter(is_active=True)
+
+    data = {
+        'users': users
+    }
+
+    return render_to_response('people/team.html', data,
+        RequestContext(request))
+
