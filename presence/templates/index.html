@@ -4,7 +4,7 @@
 {% block aside %}
 <section id="user-info">
 <img src="{% gravatar user.email 96 %}" alt="">
-<h1>{{user.get_full_name|default:user.username}}</h1>
+<h1><a href="{{ user.get_profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a></h1>
 {% user_plans user.username %}
 <a href="{% url planning %}">Plan something</a>
 </section>

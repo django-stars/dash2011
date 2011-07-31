@@ -5,8 +5,12 @@
     <div class="team-list">
         {% for user in users %}
             <div class="member">
-                <img src="{% gravatar user.email  100 %}" alt="{{ user.get_full_name }}">
-                <span>{{ user.get_full_name|default:user.username }}</span>
+                <a href="{{ user.get_profile.get_absolute_url }}">
+                    <img src="{% gravatar user.email  100 %}" alt="{{ user.get_full_name }}">
+                </a>
+                <span>
+                    <a href="{{ user.get_profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a>
+                </span>
                 <span>{% trans "Currently: " %}{{ user.get_profile.state }}</span>
                 {% if user.get_profile.get_mood %}
                     <span>Mood: {{ user.get_profile.get_mood.get_vote_display }}</span>
