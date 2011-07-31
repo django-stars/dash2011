@@ -259,3 +259,11 @@ footer {
   border-top: .25em solid #455667;
   color: #fff;
 }
+#modal {
+  box-shadow: .125em .125em .5em #222;
+  border-radius: .25em;
+  background: white;
+}
+#modal .close-modal {
+  float: right;
+}

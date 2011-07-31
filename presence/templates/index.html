@@ -6,7 +6,7 @@
 <img src="{% gravatar user.email 96 %}" alt="">
 <h1><a href="{{ user.get_profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a></h1>
 {% user_plans user.username %}
-<a href="{% url planning %}">Plan something</a>
+<a id="plan-link" href="{% url planning %}">Plan something</a>
 </section>
 <div id="voting">
   <form action="{% url vote %}" method="post" accept-charset="utf-8">

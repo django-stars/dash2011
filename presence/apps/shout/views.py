@@ -26,11 +26,11 @@ def shout_new(request):
             shout = form.save(user=request.user)
             logger.info('New %s shout from "%s"' % (('public', 'private')[shout.is_private], shout.user.username))
             if request.is_ajax():
-                return HttpResponse(json.dumps({'response': 'OK'}))
+                return HttpResponse(json.dumps({'response': 'OK'}), mimetype='application/json')
             return HttpResponseRedirect(reverse('shout-list'))
         else:
             if request.is_ajax():
-                return HttpResponse(json.dumps({'response': 'ERR', 'reason': 'Shout text is required!'}))
+                return HttpResponse(json.dumps({'response': 'ERR', 'reason': 'Shout text is required!'}), mimetype='application/json')
     else:
         form = ShoutForm()
     

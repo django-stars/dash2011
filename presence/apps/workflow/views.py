@@ -36,7 +36,8 @@ def index(
         if state_form.is_valid():
             new_state = state_form.save()
             messages.success(request, _("State changed to %s" % new_state.state))
-            return HttpResponseRedirect(redirect_to)
+            if not request.is_ajax():
+                return HttpResponseRedirect(redirect_to)
         else:
             error = True
     else:
@@ -47,7 +48,8 @@ def index(
         if project_form.is_valid():
             new_state = project_form.save()
             messages.success(request, _("Project changed to %s" % new_state.project))
-            return HttpResponseRedirect(redirect_to)
+            if not request.is_ajax():
+                return HttpResponseRedirect(redirect_to)
         else:
             error = True
     else:
@@ -61,7 +63,8 @@ def index(
         if location_form.is_valid():
             new_state = location_form.save()
             messages.success(request, _("Location changed to %s" % new_state.location))
-            return HttpResponseRedirect(redirect_to)
+            if not request.is_ajax():
+                return HttpResponseRedirect(redirect_to)
         else:
             error = True
     else:
@@ -85,7 +88,7 @@ def index(
                     'current_state_log': current_state_log,
                 },
             )
-        }))
+        }), mimetype='application/json')
     else:
         return render_to_response(
             template_name, 
