@@ -76,9 +76,12 @@ def index(
     if request.is_ajax():
         return HttpResponse(json.dumps({
             'response': 'error' if error else 'ok',
-            'state': current_state_log.state.id,
-            'project': current_state_log.project.id,
-            'location': current_state_log.location.id,
+            'state': current_state_log.state.id \
+                if current_state_log.state else None,
+            'project': current_state_log.project.id \
+                if current_state_log.project else None,
+            'location': current_state_log.location.id \
+                if current_state_log.location else None,
             'html': render_to_string(
                 ajax_template_name,
                 {
