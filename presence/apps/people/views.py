@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout as logout_
 from django.contrib.auth.models import User
@@ -62,4 +62,15 @@ def profile_edit(request):
         form = ProfileEditForm(request.user.username, instance=request.user)
 
     return render_to_response('people/profile-edit.html', {'form': form},
+        RequestContext(request))
+
+
+@login_required
+def profile_details(request, id):
+    user = get_object_or_404(User, id=id)
+
+    data = {
+        "user": user
+    }
+    return render_to_response('people/profile-details.html', data,
         RequestContext(request))

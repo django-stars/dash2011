@@ -2,6 +2,7 @@ from django import template
 from django.conf import settings
 from django.utils.hashcompat import md5_constructor
 from django.utils.html import escape
+from django.shortcuts import get_object_or_404
 
 import urllib
 
@@ -18,3 +19,8 @@ def gravatar(value, size=100):
     return escape(url)
 
 register.simple_tag(gravatar)
+
+
+@register.inclusion_tag("people/tags/profile-info.html") 
+def profile_info(username):
+    pass
